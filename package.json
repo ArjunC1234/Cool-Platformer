@@ -1,5 +1,5 @@
 {
-  "name": "empty-welcome",
+  "name": "base-starter",
   "version": "0.0.1",
   "description": "What am I about?",
   "scripts": {
@@ -13,7 +13,7 @@
     "node": "9.x"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/empty-welcome"
+    "url": "https://glitch.com/edit/#!/base-starter"
   },
   "license": "MIT",
   "keywords": [
