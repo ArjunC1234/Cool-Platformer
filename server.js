@@ -16,6 +16,10 @@ function wrap (fn) {
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: false}));
 
+if(res.status(404)){
+  res.status(404).sendFile(__dirname + "/404.html");
+}
+
 const listener = app.listen(process.env.PORT, async () => {
   console.log(`Your app is listening on port ${listener.address().port}`);
 });
