@@ -78,12 +78,13 @@
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (input.value) {
-          socket.emit('chat message', input.value);
+          socket.emit('chat message', input.value + '🥀🥀🥀🥀🥀🥀' + window.location.pathname);
           input.value = '';
         }
       });
 
-      socket.on('chat message', function(msg,usnm) {
+      socket.on('chat message', function(msg) {
+        if(msg.split('🥀🥀🥀🥀🥀🥀')[1]==window.location.pathname){
         var today = new Date();
         var min = today.getMinutes();
         var sec = today.getSeconds();
@@ -98,12 +99,13 @@
         var brk = document.createElement('div');
         item.setAttribute('class', 'message')
         brk.setAttribute('class', 'brk')
-        item.textContent = msg;
+        item.textContent = msg.split('🥀🥀🥀🥀🥀🥀')[0];
         brk.textContent = time;
         brk.innerHTML += '<br><br>'
         messages.appendChild(item);
         messages.appendChild(brk);
         window.scrollTo(0, document.body.scrollHeight+100);
+        }
       });
     </script>
   </body>
