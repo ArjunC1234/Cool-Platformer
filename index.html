@@ -17,18 +17,30 @@
       button{
         width: 10vw;
         font-size: 200%;
+        cursor: pointer;
+        background-color: #edbbb4;
+        border: 1px solid black;
       }
       body{
         margin: 0;
         padding: 0;
         overflow: hidden;
+        background-color: #edd2e0
       }
       #messages{
         overflow: auto;
+        padding: 5px;
       }
       .message{
-        background-color: beige;
-        padding: 5px;
+        background-color: #dbabbe;
+        border-radius: 8px;
+        padding: 8px;
+        max-width: 220px;
+        overflow-wrap: break-word;
+      }
+      .brk{
+        font-size: 80%;
+        font-style: italic;
       }
     </style>
   </head>
@@ -60,11 +72,25 @@
       });
 
       socket.on('chat message', function(msg) {
+        var today = new Date();
+        var min = today.getMinutes();
+        var sec = today.getSeconds();
+        if(min<10){
+          min = '0' + min;
+        }
+        if(sec<10){
+          sec = '0' + sec;
+        }
+        var time = today.getHours() + ":" + min + ":" + sec;
         var item = document.createElement('div');
-        var brk = document.create
+        var brk = document.createElement('div');
         item.setAttribute('class', 'message')
+        brk.setAttribute('class', 'brk')
         item.textContent = storage.username + ': ' + msg;
+        brk.textContent = time;
+        brk.innerHTML += '<br><br>'
         messages.appendChild(item);
+        messages.appendChild(brk);
         window.scrollTo(0, document.body.scrollHeight);
       });
     </script>
