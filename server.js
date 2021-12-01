@@ -1,25 +1,18 @@
-const bodyParser = require("body-parser");
-const express = require("express");
+const app = require('express')();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const port = process.env.PORT || 3000;
 
-const app = express();
-
-function wrap (fn) {
-  return async (req, res, next) => {
-    try {
-      await fn(req, res, next);
-    } catch (err) {
-      next(err);
-    }
-  };
-}
-
-app.use(express.static("public"));
-app.use(bodyParser.urlencoded({extended: false}));
-
-app.use(function(req,res){
-    res.status(404).sendFile(__dirname + "/404.html");
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
 });
 
-const listener = app.listen(process.env.PORT, async () => {
-  console.log(`Your app is listening on port ${listener.address().port}`);
+io.on('connection', (socket) => {
+  socket.on('chat message', msg => {
+    io.emit('chat message', msg);
+  });
+});
+
+http.listen(port, () => {
+  console.log(`Socket.IO server running at http://localhost:${port}/`);
 });

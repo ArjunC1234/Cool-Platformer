@@ -1,24 +1,12 @@
 {
-  "name": "base-starter",
+  "name": "socket-chat-example",
   "version": "0.0.1",
-  "description": "What am I about?",
-  "scripts": {
-    "start": "node server.js"
-  },
+  "description": "my first socket.io app",
   "dependencies": {
     "express": "^4.17.1",
-    "body-parser": "^1.19.0"
+    "socket.io": "^4.1.2"
   },
-  "engines": {
-    "node": "9.x"
-  },
-  "repository": {
-    "url": "https://glitch.com/edit/#!/base-starter"
-  },
-  "license": "MIT",
-  "keywords": [
-    "node",
-    "glitch",
-    "express"
-  ]
+  "scripts": {
+    "start": "node server.js"
+  }
 }
