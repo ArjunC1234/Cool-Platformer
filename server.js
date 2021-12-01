@@ -2,12 +2,8 @@ const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const port = process.env.PORT || 3000;
-const net = require('net');
-/*var addr;
-const client = net.connect({port: 80, host:"google.com"}, () => {
-  addr = client.localAddress
-});*/
-
+var url = require('url');
+var cu = '';
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
@@ -18,16 +14,17 @@ app.get('/link', (req, res) => {
 
 app.get('/chat/*', (req, res) => {
   res.sendFile(__dirname + '/chat.html');
+  cu = req.url;
 });
 
 
 io.on('connection', (socket) => {
-  io.emit('connection', 'User Connected')
+  io.emit('connection', 'User Connected,' + url.parse(cu,true).pathname)
   socket.on('chat message', msg => {
     io.emit('chat message', msg);
   });
 socket.on('disconnect', () => {
-     io.emit('connection', 'User Disconnected')
+     io.emit('connection', 'User Disconnected,' + url.parse(cu,true).pathname)
   });  
 });
 

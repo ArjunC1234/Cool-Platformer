@@ -1,5 +1,10 @@
 Loading link...
 <script>
-var alph = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789'
-window.location = '/chat/' + 
+var alph = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789';
+var aa = alph.split('');
+var rand = '';
+for(var i = 0; i<30;i++){
+  rand+=aa[Math.floor(Math.random()*aa.length)]
+}
+window.location = '/chat/' + rand
 </script>
