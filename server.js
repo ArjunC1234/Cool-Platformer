@@ -22,9 +22,9 @@ app.get('/chat/*', (req, res) => {
 io.on('connection', (socket) => {
   io.emit('connection')
   socket.on('chat message', msg => {
-    if(msg.match(/\\name\s(.*)/gims)){
-      usid = msg.replace(/\\name\s(.*)/gims, '$1');
-      console.log(msg.replace(/\\name\s(.*)/gims, '$1'))
+    if(msg.match(/\\name (.*)/gims)){
+      usid = msg.replace(/\\name\s(.*)/gims, '$1').replace('🥀🥀🥀🥀🥀🥀/chat/', '');
+      console.log(msg.replace(/\\name (.*)/gims, '$1'))
     }
     io.emit('chat message', usid + ': ' + msg);
   });

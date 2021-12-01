@@ -106,11 +106,15 @@
         brk.textContent = time;
         brk.innerHTML += '<br><br>'
         messages.appendChild(item);
-        messages.appendChild(brk);
-        window.scrollTo(0, document.body.scrollHeight+100);*/
+        messages.appendChild(brk);*/
         document.getElementById('messages').innerHTML += '<div class="message">' + msg.split('🥀🥀🥀🥀🥀🥀')[0] + '</div><div class="brk">' + time + '</div><br><br>'
         }
       });
+        document.getElementById('messages').scrollTo({
+          top: document.getElementById('messages').offsetHeight+(document.body.offsetHeight*7/100),
+          left: 0,
+          behavior: 'smooth'
+        });
     </script>
   </body>
 </html>
