@@ -10,8 +10,12 @@
         display: flex;
         z-index: 2;
       }
+      #usnm{
+        width: 15vw;
+        font-size: 200%;        
+      }
       #input{
-        width: 90vw;
+        width: 75vw;
         font-size: 200%;
       }
       button{
@@ -44,14 +48,13 @@
         font-size: 80%;
         font-style: italic;
       }
-      #custombox{
+      #details{
         position: fixed;
         top: 10px;
         right: 10px;
-        height: 200px;
-        width: 200px;
         background-color: #464d77;
-        border-radius: 20px;
+        border-radius: 5px;
+        padding: 10px;
         text-align: center;
         color: white;
         overflow: auto;
@@ -62,15 +65,22 @@
     </style>
   </head>
   <body>
+    <div id="details">
+      <b>User ID: </b><span id="usnum"></span><br>
+      <b>Messages Sent: </b><span id="msnt">0</span><br>
+    </div>
     <div id ="messages">
     </div>
     <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Send</button>
+      <input id="usnm" autocomplete="off" placeholder="Username..." value="Anonymous" maxlength="30"/>
+      <input id="input" autocomplete="off" maxlength="500"/><button>Send</button>
     </form>
     <script src="/socket.io/socket.io.js"></script>
 
     <script>
-      var usid = 'user' + Math.floor(Math.random()*1000)
+      var unum = Math.floor(Math.random()*100000);
+      document.getElementById('usnum').innerHTML = unum;
+      var msnt = 0;
       var socket = io();
 
       var messages = document.getElementById('messages');
@@ -80,8 +90,11 @@
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (input.value) {
+          var usid = document.getElementById('usnm').value + '_' + unum
           socket.emit('chat message', usid + ': ' + input.value + '🥀🥀🥀🥀🥀🥀' + window.location.pathname);
           input.value = '';
+          msnt++;          
+      document.getElementById('msnt').innerHTML = msnt;
         }
       });
       socket.on('connection', function(txt){
