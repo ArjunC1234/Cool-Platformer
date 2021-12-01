@@ -71,11 +71,30 @@
         }
         #usnm {
           width: 25vw;
-          font-size: 200%;
+          font-size: 180%;
         }
         #input {
           width: 75vw;
           font-size: 200%;
+        }
+      }
+      @media (max-width: 700px) {
+        button {
+          display: none;
+        }
+        #usnm {
+          position: fixed;
+          top: 20px;
+          right: 10px;
+          width: 120px;
+          font-size: 140%;
+        }
+        #input {
+          width: 100vw;
+          font-size: 200%;
+        }
+        #details{
+          display: none;
         }
       }
     </style>
@@ -101,6 +120,23 @@
     <script src="/socket.io/socket.io.js"></script>
 
     <script>
+      Notification.requestPermission().then(function(result) {
+        console.log(result);
+      });
+        var i=0;
+  var pageStatus=true;
+
+  function changeStatus(status) { 
+    i+=1;
+    if (status==true) {
+      console.log(i+' Page is active');
+      pageStatus=true;
+      /* change the users status to active */
+    } else {
+      pageStatus=false;
+      window.setTimeout(function() { if(pageStatus==false) { console.log(i+' Page is inactive'); /* change the users status to inactive */ } }, 1000);
+    }
+  }
       var on = 0;
       var unum = Math.floor(Math.random() * 100000);
       document.getElementById("usnum").innerHTML = unum;
