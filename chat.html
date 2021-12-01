@@ -91,7 +91,7 @@
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (input.value) {
-          var usid = document.getElementById('usnm').value + '_' + unum
+          var usid = document.getElementById('usnm').value + '-' + unum
           socket.emit('chat message', usid + ': ' + input.value + '⠀' + window.location.pathname);
           input.value = '';
           msnt++;          
