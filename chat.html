@@ -30,6 +30,7 @@
       }
       #messages{
         overflow: auto;
+        max-height: 93vh;
         padding: 5px;
       }
       .message{
@@ -97,7 +98,7 @@
           sec = '0' + sec;
         }
         var time = today.getHours() + ":" + min + ":" + sec;
-        var item = document.createElement('div');
+        /*var item = document.createElement('div');
         var brk = document.createElement('div');
         item.setAttribute('class', 'message')
         brk.setAttribute('class', 'brk')
@@ -106,7 +107,8 @@
         brk.innerHTML += '<br><br>'
         messages.appendChild(item);
         messages.appendChild(brk);
-        window.scrollTo(0, document.body.scrollHeight+100);
+        window.scrollTo(0, document.body.scrollHeight+100);*/
+        document.getElementById('messages').innerHTML += '<div class="message">' + msg.split('🥀🥀🥀🥀🥀🥀')[0] + '</div><div class="brk">' + time + '</div><br><br>'
         }
       });
     </script>
