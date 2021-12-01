@@ -18,10 +18,13 @@ app.get('/chat/*', (req, res) => {
 
 
 io.on('connection', (socket) => {
-  io.emit('connection')
+  io.emit('connection', 'User Connected')
   socket.on('chat message', msg => {
     io.emit('chat message', msg);
   });
+socket.on('disconnect', () => {
+     io.emit('connection', 'User Disconnected')
+  });  
 });
 
 http.listen(port, () => {

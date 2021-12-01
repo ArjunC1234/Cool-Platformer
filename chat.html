@@ -85,15 +85,11 @@
         }
       });
       socket.on('connection', function(txt){
-        
+        document.getElementById('messages').innerHTML +="<center>" + txt + "</center><br><br>"
       });
       socket.on('chat message', function(msg) {
         if(msg.split('🥀🥀🥀🥀🥀🥀')[1]==window.location.pathname){
-        
-    if(msg.match(/\\name (.*)/gims)){
-      usid = msg.replace(/\\name\s(.*)/gims, '$1').replace('🥀🥀🥀🥀🥀🥀/chat/', '').replace(usid + ': ', '');
-      console.log(msg.replace(/\\name (.*)/gims, '$1'))
-    }
+        var mess = msg.replace(/\*(.*?)\*/gims, '<b>$1</b>').replace(/\_(.*?)\_/gims, '<i>$1</i>');
         var today = new Date();
         var min = today.getMinutes();
         var sec = today.getSeconds();
@@ -104,7 +100,7 @@
           sec = '0' + sec;
         }
         var time = today.getHours() + ":" + min + ":" + sec;
-        document.getElementById('messages').innerHTML += '<div class="message">' + msg.split('🥀🥀🥀🥀🥀🥀')[0] + '</div><div class="brk">' + time + '</div><br>'
+        document.getElementById('messages').innerHTML += '<div class="message">' + mess.split('🥀🥀🥀🥀🥀🥀')[0] + '</div><div class="brk">' + time + '</div><br>'
         document.getElementById('messages').scrollTo({
           top: document.getElementById('messages').offsetHeight,
           left: 0,
