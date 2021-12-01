@@ -7,7 +7,6 @@ const net = require('net');
 const client = net.connect({port: 80, host:"google.com"}, () => {
   addr = client.localAddress
 });*/
-var usid;
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
@@ -15,18 +14,13 @@ app.get('/', (req, res) => {
 
 app.get('/chat/*', (req, res) => {
   res.sendFile(__dirname + '/chat.html');
-  usid = 'user' + Math.floor(Math.random()*100);
 });
 
 
 io.on('connection', (socket) => {
   io.emit('connection')
   socket.on('chat message', msg => {
-    if(msg.match(/\\name (.*)/gims)){
-      usid = msg.replace(/\\name\s(.*)/gims, '$1').replace('🥀🥀🥀🥀🥀🥀/chat/', '');
-      console.log(msg.replace(/\\name (.*)/gims, '$1'))
-    }
-    io.emit('chat message', usid + ': ' + msg);
+    io.emit('chat message', msg);
   });
 });
 

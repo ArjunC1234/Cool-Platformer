@@ -70,6 +70,7 @@
     <script src="/socket.io/socket.io.js"></script>
 
     <script>
+      var usid = 'user' + Math.floor(Math.random()*1000)
       var socket = io();
 
       var messages = document.getElementById('messages');
@@ -79,7 +80,7 @@
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         if (input.value) {
-          socket.emit('chat message', input.value + '🥀🥀🥀🥀🥀🥀' + window.location.pathname);
+          socket.emit('chat message', usid + ': ' + input.value + '🥀🥀🥀🥀🥀🥀' + window.location.pathname);
           input.value = '';
         }
       });
@@ -88,6 +89,11 @@
       });
       socket.on('chat message', function(msg) {
         if(msg.split('🥀🥀🥀🥀🥀🥀')[1]==window.location.pathname){
+        
+    if(msg.match(/\\name (.*)/gims)){
+      usid = msg.replace(/\\name\s(.*)/gims, '$1').replace('🥀🥀🥀🥀🥀🥀/chat/', '').replace(usid + ': ', '');
+      console.log(msg.replace(/\\name (.*)/gims, '$1'))
+    }
         var today = new Date();
         var min = today.getMinutes();
         var sec = today.getSeconds();
@@ -98,23 +104,14 @@
           sec = '0' + sec;
         }
         var time = today.getHours() + ":" + min + ":" + sec;
-        /*var item = document.createElement('div');
-        var brk = document.createElement('div');
-        item.setAttribute('class', 'message')
-        brk.setAttribute('class', 'brk')
-        item.textContent = msg.split('🥀🥀🥀🥀🥀🥀')[0];
-        brk.textContent = time;
-        brk.innerHTML += '<br><br>'
-        messages.appendChild(item);
-        messages.appendChild(brk);*/
-        document.getElementById('messages').innerHTML += '<div class="message">' + msg.split('🥀🥀🥀🥀🥀🥀')[0] + '</div><div class="brk">' + time + '</div><br><br>'
-        }
-      });
+        document.getElementById('messages').innerHTML += '<div class="message">' + msg.split('🥀🥀🥀🥀🥀🥀')[0] + '</div><div class="brk">' + time + '</div><br>'
         document.getElementById('messages').scrollTo({
-          top: document.getElementById('messages').offsetHeight+(document.body.offsetHeight*7/100),
+          top: document.getElementById('messages').offsetHeight,
           left: 0,
           behavior: 'smooth'
         });
+        }
+      });
     </script>
   </body>
 </html>
