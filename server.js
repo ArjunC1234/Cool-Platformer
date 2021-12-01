@@ -7,6 +7,10 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/username', (req, res) => {
+  res.sendFile(__dirname + '/username.html');
+});
+
 io.on('connection', (socket) => {
   socket.on('chat message', msg => {
     io.emit('chat message', msg);
@@ -14,5 +18,5 @@ io.on('connection', (socket) => {
 });
 
 http.listen(port, () => {
-  console.log(`Socket.IO server running at http://localhost:${port}/`);
+  console.log(`running at http://localhost:${port}/`);
 });
