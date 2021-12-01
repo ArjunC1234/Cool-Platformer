@@ -93,13 +93,18 @@
           width: 100vw;
           font-size: 200%;
         }
-        #details{
+        #details {
           display: none;
+        }
+        .reply{
+          background-color:#edd2e0;
+          border: 2px solid #baa1a7;
+          padding: 2px;
         }
       }
     </style>
   </head>
-  <body>
+  <body onmouseover="changeStatus(true);" onmouseout="changeStatus(false);">
     <div id="details">
       <b>User ID: </b><span id="usnum"></span><br />
       <b>Messages Sent: </b><span id="msnt">0</span><br />
@@ -120,85 +125,90 @@
     <script src="/socket.io/socket.io.js"></script>
 
     <script>
-      Notification.requestPermission().then(function(result) {
-        console.log(result);
-      });
-        var i=0;
-  var pageStatus=true;
-
-  function changeStatus(status) { 
-    i+=1;
-    if (status==true) {
-      console.log(i+' Page is active');
-      pageStatus=true;
-      /* change the users status to active */
-    } else {
-      pageStatus=false;
-      window.setTimeout(function() { if(pageStatus==false) { console.log(i+' Page is inactive'); /* change the users status to inactive */ } }, 1000);
-    }
-  }
-      var on = 0;
-      var unum = Math.floor(Math.random() * 100000);
-      document.getElementById("usnum").innerHTML = unum;
-      var msnt = 0;
-      var socket = io();
-
-      var messages = document.getElementById("messages");
-      var form = document.getElementById("form");
-      var input = document.getElementById("input");
-
-      form.addEventListener("submit", function(e) {
-        e.preventDefault();
-        if (input.value) {
-          var usid = document.getElementById("usnm").value + "-" + unum;
-          socket.emit(
-            "chat message",
-            usid + ": " + input.value + "⠀" + window.location.pathname
-          );
-          input.value = "";
-          msnt++;
-          document.getElementById("msnt").innerHTML = msnt;
-        }
-      });
-      socket.on("connection", function(txt) {
-        if (txt.split(",")[1] == window.location.pathname) {
-          document.getElementById("messages").innerHTML +=
-            "<center>" + txt.split(",")[0] + "</center><br><br>";
-          document.getElementById("messages").scrollTo({
-            top: document.getElementById("messages").scrollHeight,
-            left: 0,
-            behavior: "smooth"
+          Notification.requestPermission().then(function(result) {
+            console.log(result);
           });
+            var i=0;
+      var pageStatus=true;
+
+      function changeStatus(status) {
+        i+=1;
+        if (status==true) {
+          console.log(i+' Page is active');
+          pageStatus=true;
+          /* change the users status to active */
+        } else {
+          pageStatus=false;
+          window.setTimeout(function() { if(pageStatus==false) { console.log(i+' Page is inactive'); /* change the users status to inactive */ } }, 1000);
         }
-      });
-      socket.on("chat message", function(msg) {
-        if (msg.split("⠀")[1] == window.location.pathname) {
-          var mess = msg
-            .replace(/\*(.*?)\*/gims, "<b>$1</b>")
-            .replace(/\_(.*?)\_/gims, "<i>$1</i>");
-          var today = new Date();
-          var min = today.getMinutes();
-          var sec = today.getSeconds();
-          if (min < 10) {
-            min = "0" + min;
-          }
-          if (sec < 10) {
-            sec = "0" + sec;
-          }
-          var time = today.getHours() + ":" + min + ":" + sec;
-          document.getElementById("messages").innerHTML +=
-            '<div class="message">' +
-            mess.split("⠀")[0] +
-            '</div><div class="brk">' +
-            time +
-            "</div><br>";
-          document.getElementById("messages").scrollTo({
-            top: document.getElementById("messages").scrollHeight,
-            left: 0,
-            behavior: "smooth"
+      }
+          var on = 0;
+          var unum = Math.floor(Math.random() * 100000);
+          document.getElementById("usnum").innerHTML = unum;
+          var msnt = 0;
+          var socket = io();
+          var mess = '';
+          var messages = document.getElementById("messages");
+          var form = document.getElementById("form");
+          var input = document.getElementById("input");
+
+          form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            if (input.value) {
+              var usid = document.getElementById("usnm").value + "-" + unum;
+              socket.emit(
+                "chat message",
+                usid + ": " + input.value + "⠀" + window.location.pathname
+              );
+              input.value = "";
+              msnt++;
+              document.getElementById("msnt").innerHTML = msnt;
+            }
           });
-        }
-      });
+          socket.on("connection", function(txt) {
+            if (txt.split(",")[1] == window.location.pathname) {
+              document.getElementById("messages").innerHTML +=
+                "<center>" + txt.split(",")[0] + "</center><br><br>";
+              document.getElementById("messages").scrollTo({
+                top: document.getElementById("messages").scrollHeight,
+                left: 0,
+                behavior: "smooth"
+              });
+            }
+          });
+          socket.on("chat message", function(msg) {
+            if (msg.split("⠀")[1] == window.location.pathname) {
+              if(!pageStatus){
+                var notification = new Notification('new easychat message', { body: msg.split("⠀")[0]});
+              }
+              mess += msg
+                .replace(/\*(.*?)\*/gims, "<b>$1</b>")
+                .replace(/\_(.*?)\_/gims, "<i>$1</i>")
+                .replace(/\>(.*?)\>/gims, '<div class="reply">$1</div>');
+              var today = new Date();
+              var min = today.getMinutes();
+              var sec = today.getSeconds();
+              if (min < 10) {
+                min = "0" + min;
+              }
+              if (sec < 10) {
+                sec = "0" + sec;
+              }
+              var time = today.getHours() + ":" + min + ":" + sec;
+              document.getElementById("messages").innerHTML +=
+                '<div class="message">' +
+                mess.split("⠀")[0] +
+                '</div><div class="brk">' +
+                time +
+                "</div><br>";
+              document.getElementById("messages").scrollTo({
+                top: document.getElementById("messages").scrollHeight,
+                left: 0,
+                behavior: "smooth"
+              });
+              mess = '';
+            }
+          });
     </script>
   </body>
 </html>
