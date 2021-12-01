@@ -34,6 +34,13 @@
         background-color: #edd2e0;
         font-family: sans-serif;
       }
+      
+      .reply{
+          background-color:#edd2e0;
+          border: 2px solid #baa1a7;
+          padding: 5px;
+          border-radius: 5px;
+       }
       #messages {
         overflow: auto;
         max-height: 93vh;
@@ -43,8 +50,9 @@
         background-color: #dbabbe;
         border-radius: 8px;
         padding: 8px;
-        max-width: 220px;
+        max-width: 300px;
         overflow-wrap: break-word;
+        cursor: pointer;
       }
       .brk {
         font-size: 80%;
@@ -96,11 +104,6 @@
         #details {
           display: none;
         }
-        .reply{
-          background-color:#edd2e0;
-          border: 2px solid #baa1a7;
-          padding: 2px;
-        }
       }
     </style>
   </head>
@@ -134,7 +137,6 @@
       function changeStatus(status) {
         i+=1;
         if (status==true) {
-          console.log(i+' Page is active');
           pageStatus=true;
           /* change the users status to active */
         } else {
@@ -151,7 +153,11 @@
           var messages = document.getElementById("messages");
           var form = document.getElementById("form");
           var input = document.getElementById("input");
-
+        
+      function rpl(txt){
+        mess = '<div class="reply">' + txt + '</div>'
+      }
+        
           form.addEventListener("submit", function(e) {
             e.preventDefault();
             if (input.value) {
@@ -184,7 +190,7 @@
               mess += msg
                 .replace(/\*(.*?)\*/gims, "<b>$1</b>")
                 .replace(/\_(.*?)\_/gims, "<i>$1</i>")
-                .replace(/\>(.*?)\>/gims, '<div class="reply">$1</div>');
+                .replace(/\|(.*?)\|/gims, '<div class="reply">$1</div>');
               var today = new Date();
               var min = today.getMinutes();
               var sec = today.getSeconds();
@@ -196,7 +202,7 @@
               }
               var time = today.getHours() + ":" + min + ":" + sec;
               document.getElementById("messages").innerHTML +=
-                '<div class="message">' +
+                '<div class="message" onclick="rpl(this.innerHTML)">' +
                 mess.split("⠀")[0] +
                 '</div><div class="brk">' +
                 time +
