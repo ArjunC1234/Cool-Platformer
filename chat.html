@@ -54,6 +54,9 @@
         overflow-wrap: break-word;
         cursor: pointer;
       }
+      .message:hover{
+        box-shadow: inset 0px 0px 2px 1px #baa1a7;
+      }
       .brk {
         font-size: 80%;
         font-style: italic;
@@ -202,7 +205,7 @@
               }
               var time = today.getHours() + ":" + min + ":" + sec;
               document.getElementById("messages").innerHTML +=
-                '<div class="message" onclick="rpl(this.innerHTML)">' +
+                '<div class="message" onclick="rpl(this.innerHTML)" alt="Reply to this message" role="img">' +
                 mess.split("⠀")[0] +
                 '</div><div class="brk">' +
                 time +
