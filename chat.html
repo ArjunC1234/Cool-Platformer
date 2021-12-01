@@ -114,6 +114,10 @@
     <div id="details">
       <b>User ID: </b><span id="usnum"></span><br />
       <b>Messages Sent: </b><span id="msnt">0</span><br />
+      <b>Online Now</b>
+      <p>
+        
+      </p>
     </div>
     <div id="messages"></div>
     <form id="form" action="">
@@ -131,6 +135,9 @@
     <script src="/socket.io/socket.io.js"></script>
 
     <script>
+      function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
           Notification.requestPermission().then(function(result) {
             console.log(result);
           });
@@ -218,6 +225,15 @@
               mess = '';
             }
           });
+      
+          socket.on("online", function(usidm) {
+            
+          })
+      function online(){
+        socket.emit("online", usid + '⠀' + window.location.pathname)
+        await sleep(200);
+        online();
+      }
     </script>
   </body>
 </html>

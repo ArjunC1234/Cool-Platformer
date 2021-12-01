@@ -23,6 +23,9 @@ io.on('connection', (socket) => {
   socket.on('chat message', msg => {
     io.emit('chat message', msg);
   });
+  socket.on('online', usidm => {
+    io.emit('online', usidm);
+  });
 socket.on('disconnect', () => {
      io.emit('connection', 'User Disconnected,' + url.parse(cu,true).pathname)
   });  
