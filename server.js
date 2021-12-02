@@ -5,9 +5,11 @@ const port = process.env.PORT || 3000;
 var url = require("url");
 var cu = "";
 
+app.set("trust proxy", true);
+
 app.use((req, res, next) => {
-  if (req.get('X-Forwarded-Proto').indexOf("https")==-1) return res.redirect("https://" + req.hostname + req.url);
-  next();
+  if (!req.secure) return res.redirect("https://" + req.hostname + req.url);
+  return next();
 });
 
 app.get("/", (req, res) => {
