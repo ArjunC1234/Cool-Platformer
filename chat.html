@@ -110,6 +110,11 @@
           display: none;
         }
       }
+      #notes{
+        position: fixed;
+        bottom: 5vh;
+        left: 0px;
+      }
     </style>
   </head>
   <body onmouseover="changeStatus(true);" onmouseout="changeStatus(false);">
@@ -120,6 +125,9 @@
       <p id="onnow"></p>-->
     </div>
     <div id="messages"></div>
+    <p id="notes">
+      
+    </p>
     <form id="form" action="">
       <input
         id="usnm"
@@ -170,8 +178,11 @@
       var form = document.getElementById("form");
       var input = document.getElementById("input");
 
-      function rpl(txt) {
+      async function rpl(txt) {
         mess = '<div class="reply">' + txt + "</div>";
+        document.getElementById('notes').innerHTML = 'Replying to message: <i>' + txt + '</i>';
+        await sleep(2000);
+        document.getElementById('notes').innerHTML = '';
       }
 
       form.addEventListener("submit", function(e) {
