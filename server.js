@@ -1,35 +1,40 @@
-const app = require('express')();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const app = require("express")();
+const http = require("http").Server(app);
+const io = require("socket.io")(http);
 const port = process.env.PORT || 3000;
-var url = require('url');
-var cu = '';
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+var url = require("url");
+var cu = "";
+
+app.use((req, res, next) => {
+  if (req.get('X-Forwarded-Proto').indexOf("https")==-1) return res.redirect("https://" + req.hostname + req.url);
+  next();
 });
 
-app.get('/link', (req, res) => {
-  res.sendFile(__dirname + '/link.html');
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
 });
 
-app.get('/chat/*', (req, res) => {
-  res.sendFile(__dirname + '/chat.html');
+app.get("/link", (req, res) => {
+  res.sendFile(__dirname + "/link.html");
+});
+
+app.get("/chat/*", (req, res) => {
+  res.sendFile(__dirname + "/chat.html");
   cu = req.url;
 });
 
-
-io.on('connection', (socket) => {
-  io.emit('connection', 'User Connected,' + url.parse(cu,true).pathname)
-  socket.on('chat message', msg => {
-    io.emit('chat message', msg);
+io.on("connection", socket => {
+  io.emit("connection", "User Connected," + url.parse(cu, true).pathname);
+  socket.on("chat message", msg => {
+    io.emit("chat message", msg);
   });
-  socket.on('online', usidm => {
-    io.emit('online', usidm);
+  socket.on("online", usidm => {
+    io.emit("online", usidm);
   });
-socket.on('disconnect', () => {
-     io.emit('connection', 'User Disconnected,' + url.parse(cu,true).pathname);
-     io.emit('offline', '')
-  });  
+  socket.on("disconnect", () => {
+    io.emit("connection", "User Disconnected," + url.parse(cu, true).pathname);
+    io.emit("offline", "");
+  });
 });
 
 http.listen(port, () => {
