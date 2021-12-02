@@ -176,10 +176,18 @@
         e.preventDefault();
         if (input.value) {
           var usid = document.getElementById("usnm").value + "-" + unum;
+          if(mess==""){
           socket.emit(
             "chat message",
             usid + ": " + input.value + "⠀" + window.location.pathname
           );
+          }else{
+          socket.emit(
+            "chat message",
+            mess.split("⠀")[0] + usid + ": " + input.value + "⠀" + window.location.pathname 
+          );
+            
+          }
           input.value = "";
           msnt++;
           document.getElementById("msnt").innerHTML = msnt;
