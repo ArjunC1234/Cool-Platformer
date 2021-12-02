@@ -27,7 +27,8 @@ io.on('connection', (socket) => {
     io.emit('online', usidm);
   });
 socket.on('disconnect', () => {
-     io.emit('connection', 'User Disconnected,' + url.parse(cu,true).pathname)
+     io.emit('connection', 'User Disconnected,' + url.parse(cu,true).pathname);
+     io.emit('offline', '')
   });  
 });
 
