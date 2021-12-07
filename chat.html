@@ -27,7 +27,7 @@
         background-color: #edbbb4;
         border: 1px solid black;
       }
-      .dark > button{
+      .dark button{
         background-color: gold !important;
       }
       body {
@@ -77,20 +77,21 @@
         color: white;
         overflow: auto;
       }
-      .dark > #details{
-        background-color: 
+      .dark #details{
+        background-color: black !important;
       }
-      .dark > .reply{
+      .dark .reply{
         background-color: #555 !important;
         color: white !important;
       }
-      .dark > .mesage{
+      .dark .message {
         background-color: #333 !important;
       }
       .dark{
         color: gold !important;
+        background-color: black !important;
       }      
-      .dark > .message:hover {
+      .dark .message:hover {
         box-shadow: inset 0px 0px 2px 1px gold !important;
       }
       a {
@@ -198,7 +199,7 @@
       var input = document.getElementById("input");
 
       async function rpl(txt) {
-        mess = '<div class="reply">' + txt + "</div>";
+        mess = '|' + txt + "|";
         document.getElementById('notes').innerHTML = 'Replying to message: <i>' + txt + '</i>';
         await sleep(2000);
         document.getElementById('notes').innerHTML = '';
