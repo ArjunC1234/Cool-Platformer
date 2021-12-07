@@ -94,6 +94,10 @@
       .dark .message:hover {
         box-shadow: inset 0px 0px 2px 1px gold !important;
       }
+      .dark input[type="text"]{
+       background-color: #555;
+        color: white;
+      }
       a {
         color: inherit;
       }
@@ -141,6 +145,7 @@
     <div id="details">
       <b>User ID: </b><span id="usnum"></span><br />
       <b>Messages Sent: </b><span id="msnt">0</span><br />
+      <b>Dark Mode: </b><input type="checkbox" id="dm" onchange="toggleDark()">
       <!--<b>Online Now</b>
       <p id="onnow"></p>-->
     </div>
@@ -155,8 +160,9 @@
         placeholder="Username..."
         value="Anonymous"
         maxlength="20"
+        type="text"
       />
-      <input id="input" autocomplete="off" maxlength="500" /><button>
+      <input id="input" autocomplete="off" maxlength="500" type="text"/><button>
         Send
       </button>
     </form>
@@ -186,6 +192,13 @@
               ); /* change the users status to inactive */
             }
           }, 1000);
+        }
+      }
+      function toggleDark(){
+        if(document.getElementById('dm').checked){
+          document.body.setAttribute('class', 'dark');
+        }else{
+          document.body.setAttribute('class', '');          
         }
       }
       var on = 0;
