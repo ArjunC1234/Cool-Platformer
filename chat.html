@@ -258,10 +258,10 @@
             });
           }
           mess = msg
-            .replace(/\*(.*?)\*/gims, "<b>$1</b>")
-            .replace(/\_(.*?)\_/gims, "<i>$1</i>")
             .replace(/\</, "&lt;")
             .replace(/\>/, "&gt;")
+            .replace(/\*(.*?)\*/gims, "<b>$1</b>")
+            .replace(/\_(.*?)\_/gims, "<i>$1</i>")
             .replace(/\|(.*?)\|/gims, '<div class="reply">$1</div>');
           var today = new Date();
           var min = today.getMinutes();
