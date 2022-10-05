@@ -9,8 +9,14 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-io.on("connection", function(user) {
-  io.emit("online", `${user} has connected.`)
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
+
+io.on('chat message', (socket) => {
 });
 
 http.listen(port, () => {
