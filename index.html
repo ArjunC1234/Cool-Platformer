@@ -22,6 +22,7 @@
     <h1 id="title">
       Welcome to my first chat room in socket.io
     </h1>
+    <input type="text" id="user" placeholder="type name here">
     <input type="text" id="chatinput" placeholder="type text here">
     <div class="logs" id="chatlog"></div>
     
@@ -29,7 +30,7 @@
     <script>
       var socket = io();
       //type js here
-      document.getElementById("chatinput").addEventListener("keyup", function (e) {
+      document.querySelector("input").addEventListener("keyup", function (e) {
         if (e.key == "Enter" && document.getElementById("chatinput").value.trim() != '') {
           console.log("pressed")
           socket.emit("chat message", document.getElementById("chatinput").value)
