@@ -29,7 +29,14 @@
     <script>
       var socket = io();
       //type js here
-      socket.on("chat message", function() {
+      document.getElementById("chatinput").addEventListener("keyup", function (e) {
+        if (e.key == "Enter" && document.getElementById("chatinput").value.trim() != '') {
+          console.log("pressed")
+          socket.emit("chat message", document.getElementById("chatinput").value)
+          document.getElementById("chatinput").value = ''
+        }
+      })
+      socket.on("chat message", function(arg) {
         let ele = document.createElement("p")
         ele.innerHTML = arg
         document.getElementById("chatlog").appendChild(ele)

@@ -14,10 +14,11 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
+  socket.on('chat message', (msg) => {
+    io.sockets.emit('chat message', msg)
+  });
 });
 
-io.on('chat message', (socket) => {
-});
 
 http.listen(port, () => {
   console.log(`running at ${port}`);
