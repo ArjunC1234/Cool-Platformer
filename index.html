@@ -30,7 +30,12 @@
       var socket = io();
       //type js here
       socket.on("connection", function() {
-        socket.emit("connection", window.prompt("What is your name."))
+        socket.emit("connection", "user")
+      })
+      socket.on("online", function(arg) {
+        let ele = document.createElement("p")
+        ele.innerHTML = arg
+        document.getElementById("chatlog").appendChild(ele)
       })
     </script>
   </body>
