@@ -1,47 +1,26 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <title>easychat</title>
+    <title>socketio temp made from easy chat cuz i couldnt figure it out</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <style>
-      body{
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #edd2e0;
-        font-family: sans-serif;
-        display: flex;
-        height: 100vh;
-        width: 100vw;
-        justify-content: center;
-        align-items: center;
-        font-size: 200%;
-      }
-      #main{
-        text-align: center;
-        background-color: #dbabbe;
-        padding: 100px;
-        border-radius: 30px;
-        display: grid;
-        place-items: center;
-      }
-      a{
-        color: inherit;
-      }
-      h1{
-        margin: 0px;
+      h1 {
+        font-family : "Verdana";
+        font-size : 30px;
+        width : max-content;
       }
     </style>
   </head>
   <body>
-    <div id="main">
-      <div>
+    <!--TYPE HTML HERE-->
     <h1>
-      easychat
+      Welcome to my first chat room in socket.io
     </h1>
-        <br>
-          <a href="/chat/">Main Chat Room</a><br>
-          <br>
-          <a href="/link/">Create Shareable Link</a>
-      </div>
-    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      //type js here
+    </script>
   </body>
 </html>
