@@ -33,6 +33,9 @@
         font-family: cursive;
         border-radius : 5px;
         margin:5px;
+        overflow-x : wrap;
+        word-wrap: break-word;
+        height : min-content;
         max-width : 500px;
         min-width : 75px;
       }
@@ -153,7 +156,7 @@
         div.appendChild(nameele)
         if (!(document.getElementById("chatlog").childNodes.length === 0)) {
           let lastmsg = document.getElementById("chatlog").lastElementChild;
-          if (lastmsg.style.innerText == userid) {
+          if (lastmsg.style.innerText == userid && userid != id) {
             lastmsg.lastElementChild.remove()
           }
         }
