@@ -51,7 +51,6 @@
         margin-bottom : -2px;
         float : right;
         margin-left: auto;
-        order: 2;
       }
       .logs {
         display : flex;
@@ -136,7 +135,7 @@
         div.className = "msg"
         if (userid == id) {
           ele.className = "me"
-          div.style.float = "right"
+          div.className = "msgown"
         } else {
           ele.className = "other"
         }
@@ -147,7 +146,6 @@
         if (!(document.getElementById("chatlog").childNodes.length === 0)) {
           let lastmsg = document.getElementById("chatlog").lastElementChild;
           if (lastmsg.style.innerText == userid) {
-            lastmsg.className = "msgown"
             lastmsg.lastElementChild.remove()
           }
         }
