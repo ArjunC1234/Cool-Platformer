@@ -46,16 +46,15 @@
       .msg {
         margin-bottom : -2px;
         float : left;
-        clear: left;
-        clear : right;
       }
       .msgown {
         margin-bottom : -2px;
         float : right;
-        clear: left;
-        clear : right;
       }
       .logs {
+        display : flex;
+        flex-direction : column;
+        flex-width : 100%;
         width : 700px;
         height : 600px;
         overflow-y : scroll;
@@ -82,7 +81,7 @@
            body: name
           });
           notification.onclick = function() {
-           window.open('http://mychatroom.glitch.me');
+           window.open('http://mychatroom.glitch.me', '_blank').focus();
           };
          }
         }
