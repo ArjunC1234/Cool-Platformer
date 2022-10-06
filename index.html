@@ -12,6 +12,7 @@
       }
       input {
         height : 30px;
+        background-color : lightgray;
         font-size : 20px;
       }
       #user {
@@ -64,11 +65,13 @@
         
       }
       .sendbtn {
-        width : 100px;
-        height : 30px;
+        width : 90px;
+        height : 35px;
         margin-left:0px;
         margin-right: 0px;
         padding:0px;
+        font-size : 25px;
+        font-family : "Verdana";
       }
       .logs {
         display : flex;
@@ -77,6 +80,14 @@
         height : 600px;
         overflow-y : scroll;
         border: 3px solid black;
+        background-image : url("https://cdn.glitch.global/8aa95058-d14f-4453-bd36-48a32cf17f84/286383.jpg?v=1665074100928");
+        background-repeat : no-repeat;
+        background-size : cover;
+      }
+      .controls {
+        display: flex;
+        flex-direction: row;
+        flex-wrap : none;
       }
     </style>
   </head>
@@ -87,7 +98,7 @@
     </h1>
     <div id="chatcontainer">
       <div class="logs" id="chatlog"></div>
-      <div>
+      <div id="controlscontainer" class="controls">
         <input type="text" id="user" placeholder="type name here" maxlength="12">
         <input type="text" id="chatinput" placeholder="type text here">
         <button id="sendbtn" class="sendbtn">
