@@ -14,16 +14,19 @@
         height : 30px;
         background-color : lightgray;
         font-size : 20px;
+        border : none;
       }
       #user {
         width : 150px;
         position : relative;
+        border-right : 2px solid black;
       }
       #chatinput {
         width : 450px;
         position : relative;
         right :0px;
         left :0px;
+        border-right : 2px solid black;
       }
       .other {
         color : black;
@@ -52,7 +55,7 @@
         top : -7px;
         left : 7px;
         font-size : 17px;
-        color : gray;
+        color : lightgray;
       }
       .msg {
         margin-bottom : -8px;
@@ -65,13 +68,15 @@
         
       }
       .sendbtn {
-        width : 90px;
-        height : 35px;
+        width : 88px;
+        height : 32px;
         margin-left:0px;
         margin-right: 0px;
         padding:0px;
         font-size : 25px;
         font-family : "Verdana";
+        border-radius : 0px;
+        border : none;
       }
       .logs {
         display : flex;
@@ -80,7 +85,7 @@
         height : 600px;
         overflow-y : scroll;
         border: 3px solid black;
-        background-image : url("https://cdn.glitch.global/8aa95058-d14f-4453-bd36-48a32cf17f84/286383.jpg?v=1665074100928");
+        background : linear-gradient(0deg, rgba(0,0,0,0.8), rgba(0,0,0,0.5)), url("https://cdn.glitch.global/8aa95058-d14f-4453-bd36-48a32cf17f84/286383.jpg?v=1665074100928");
         background-repeat : no-repeat;
         background-size : cover;
       }
@@ -88,14 +93,13 @@
         display: flex;
         flex-direction: row;
         flex-wrap : none;
+        border : 3px solid black;
+        width : max-content;
       }
     </style>
   </head>
   <body>
     <!--TYPE HTML HERE-->
-    <h1 id="title">
-      Welcome to my first chat room in socket.io
-    </h1>
     <div id="chatcontainer">
       <div class="logs" id="chatlog"></div>
       <div id="controlscontainer" class="controls">
