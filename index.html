@@ -18,11 +18,11 @@
       #user {
         width : 100px;
       }
-      #other {
+      .other {
         color : black;
         background-color : lightgray;
       }
-      #me {
+      .me {
         color : white;
         background-color : blue;
       }
@@ -44,6 +44,9 @@
       }
       .msg {
         margin-bottom : 10px;
+      }
+      .msgown {
+        margin-bottom : 1px;
       }
     </style>
   </head>
@@ -86,17 +89,24 @@
       socket.on("chat message", function(name, msg, userid) {
         let ele = document.createElement("p")
         let div = document.createElement("div")
+        div.style.innerText = userid
         div.style.class = "msg"
         if (userid == id) {
-          ele.style.class = ""
+          ele.style.class = "me"
+        } else {
+          ele.style.class = "other"
         }
         let nameele = document.createElement("name")
         ele.innerHTML = msg
         nameele.innerHTML = name
         div.appendChild(ele)
         div.appendChild(nameele)
-        let lastmsg = document.getElementById("chatlog").lastElementChild;
-        if (lastmsg.lastElementChild)
+        if ()
+          let lastmsg = document.getElementById("chatlog").lastElementChild;
+          if (lastmsg.style.innerText == id) {
+            lastmsg.style.class = "msgown"
+            lastmsg.lastElementChild.remove()
+          }
         
         document.getElementById("chatlog").appendChild(div)
         
