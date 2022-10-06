@@ -74,6 +74,18 @@
     
     <script src="/socket.io/socket.io.js"></script>
     <script>
+        function notifyMe(name) {
+         if (Notification.permission !== 'granted')
+          Notification.requestPermission();
+         else {
+          var notification = new Notification('New Message! (chatroom)', {
+           body: name
+          });
+          notification.onclick = function() {
+           window.open('http://mychatroom.glitch.me');
+          };
+         }
+        }
       function generate(n) {
         var add = 1, max = 12 - add;   // 12 is the min safe number Math.random() can generate without it starting to pad the end with zeros.   
         
@@ -99,6 +111,15 @@
           document.getElementById("chatinput").value = ''
         }
       })
+      document.addEventListener('DOMContentLoaded', function() {
+        if (!Notification) {
+        alert('Desktop notifications not available in your browser. Try Chromium.');
+        return;
+        }
+
+        if (Notification.permission !== 'granted')
+        Notification.requestPermission();
+      });
       socket.on("chat message", function(name, msg, userid) {
         let ele = document.createElement("p")
         let div = document.createElement("div")
@@ -124,38 +145,9 @@
         }
         
         document.getElementById("chatlog").appendChild(div)
-        if (!(document.visibilityState === 'visible')) {
-          const notifyMe = () => {
-            if (!window.Notification) {
-              console.log('Browser does not support notifications.')
-            } else {
-              // check if permission is already granted
-              if (Notification.permission === 'granted') {
-                // show notification here
-                const notify = new Notification('Hi there!', {
-                  body: 'How are you doing?',
-                  icon: 'https://bit.ly/2DYqRrh'
-                })
-              } else {
-                // request permission from the user
-                Notification.requestPermission()
-                  .then(function (p) {
-                    if (p === 'granted') {
-                      // show notification here
-                      const notify = new Notification('Hi there!', {
-                        body: 'How are you doing?',
-                        icon: 'https://bit.ly/2DYqRrh'
-                      })
-                    } else {
-                      console.log('User has blocked notifications.')
-                    }
-                  })
-                  .catch(function (err) {
-                    console.error(err)
-                  })
-              }
-            }
-          }
+        // request permission on page load
+        if (!document.hasFocus()) {
+          notifyMe()
         }
       })
     </script>
