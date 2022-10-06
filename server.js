@@ -16,8 +16,8 @@ io.on('connection', (socket) => {
     console.log('user disconnected');
   });
   
-  socket.on('chat message', (name, msg) => {
-    io.sockets.emit('chat message', name, msg)
+  socket.on('chat message', (name, msg, id) => {
+    io.sockets.emit('chat message', name, msg, id)
   });
 });
 
@@ -25,3 +25,4 @@ io.on('connection', (socket) => {
 http.listen(port, () => {
   console.log(`running at ${port}`);
 });
+

@@ -18,16 +18,22 @@
       #user {
         width : 100px;
       }
+      #other {
+        color : black;
+        background-color : lightgray;
+      }
+      #me {
+        color : white;
+        background-color : blue;
+      }
       p {
         padding:5px;
         padding-left : 8px;
         padding-right : 8px;
         font-family: cursive;
         border-radius : 5px;
-        color : white;
         margin:5px;
         max-width : 300px;
-        background-color : blue;
       }
       name {
         position : relative;
@@ -52,6 +58,20 @@
     
     <script src="/socket.io/socket.io.js"></script>
     <script>
+      function generate(n) {
+        var add = 1, max = 12 - add;   // 12 is the min safe number Math.random() can generate without it starting to pad the end with zeros.   
+        
+        if ( n > max ) {
+                return generate(max) + generate(n - max);
+        }
+        
+        max        = Math.pow(10, n+add);
+        var min    = max/10; // Math.pow(10, n) basically
+        var number = Math.floor( Math.random() * (max - min + 1) ) + min;
+        
+        return ("" + number).substring(add); 
+      }
+      var id = generate(20)
       var socket = io();
       //type js here
       document.getElementById("chatinput").addEventListener("keyup", function (e) {
@@ -59,21 +79,27 @@
         if (e.key == "Enter" && document.getElementById("chatinput").value.trim() != '' && document.getElementById("user").value.trim() != '') {
           let msg = document.getElementById("chatinput").value
           let name = document.getElementById("user").value
-          socket.emit("chat message", name, msg)
+          socket.emit("chat message", name, msg, id)
           document.getElementById("chatinput").value = ''
         }
       })
-      socket.on("chat message", function(name, msg) {
+      socket.on("chat message", function(name, msg, userid) {
         let ele = document.createElement("p")
         let div = document.createElement("div")
         div.style.class = "msg"
+        if (userid == id) {
+          ele.style.class = ""
+        }
         let nameele = document.createElement("name")
         ele.innerHTML = msg
         nameele.innerHTML = name
         div.appendChild(ele)
         div.appendChild(nameele)
+        let lastmsg = document.getElementById("chatlog").lastElementChild;
+        if (lastmsg.lastElementChild)
+        
         document.getElementById("chatlog").appendChild(div)
-        console.log(arg)
+        
       })
     </script>
   </body>
