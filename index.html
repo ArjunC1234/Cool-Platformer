@@ -35,7 +35,7 @@
       //type js here
       document.querySelector("input").addEventListener("keyup", function (e) {
         if (e.key == "Enter" && document.getElementById("chatinput").value.trim() != '' && document.getElementById("user").value.trim() != '') {
-          socket.emit("chat message", document.getElementById("chatinput").value + " |123828749270183718748148124781247723616199374286| " + document.getElementById("user").value)
+          socket.emit("chat message", {document.getElementById("chatinput").value, document.getElementById("user").value})
           document.getElementById("chatinput").value = ''
         }
       })
