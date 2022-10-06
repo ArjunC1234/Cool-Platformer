@@ -44,9 +44,19 @@
       }
       .msg {
         margin-bottom : 10px;
+        float : left;
+        position : relative;
       }
       .msgown {
         margin-bottom : 1px;
+        float : left;
+        position : relative;
+      }
+      .logs {
+        width : 700px;
+        height : 600px;
+        overflow-y : scroll;
+        border: 3px solid black;
       }
     </style>
   </head>
@@ -93,6 +103,7 @@
         div.className = "msg"
         if (userid == id) {
           ele.className = "me"
+          div.style.float = "right"
         } else {
           ele.className = "other"
         }
@@ -103,14 +114,14 @@
         div.appendChild(nameele)
         if (!(document.getElementById("chatlog").childNodes.length === 0)) {
           let lastmsg = document.getElementById("chatlog").lastElementChild;
-          if (lastmsg.style.innerText == id) {
+          if (lastmsg.style.innerText == userid) {
             lastmsg.className = "msgown"
             lastmsg.lastElementChild.remove()
           }
         }
         
         document.getElementById("chatlog").appendChild(div)
-        
+        document.getElementById("chatlog").appendChild(document.createElement("br"))
       })
     </script>
   </body>
