@@ -19,12 +19,25 @@
         width : 100px;
       }
       p {
+        padding:5px;
+        padding-left : 8px;
+        padding-right : 8px;
+        font-family: cursive;
+        border-radius : 5px;
         color : white;
         margin:5px;
-        width : fit;
         max-width : 300px;
-        border-radius : 12px;
         background-color : blue;
+      }
+      name {
+        position : relative;
+        top : -8px;
+        left : 7px;
+        font-size : 17px;
+        color : gray;
+      }
+      .msg {
+        margin-bottom : 10px;
       }
     </style>
   </head>
@@ -46,19 +59,20 @@
         if (e.key == "Enter" && document.getElementById("chatinput").value.trim() != '' && document.getElementById("user").value.trim() != '') {
           let msg = document.getElementById("chatinput").value
           let name = document.getElementById("user").value
-          let str = name + ": " + msg
-          console.log("pressed")
-          socket.emit("chat message", str.toString())
+          socket.emit("chat message", name, msg)
           document.getElementById("chatinput").value = ''
         }
       })
-      socket.on("chat message", function(arg) {
+      socket.on("chat message", function(name, msg) {
         let ele = document.createElement("p")
         let div = document.createElement("div")
-        let name = document.createElement("name")
-        
-        ele.innerHTML = arg
-        document.getElementById("chatlog").appendChild(ele)
+        div.style.class = "msg"
+        let nameele = document.createElement("name")
+        ele.innerHTML = msg
+        nameele.innerHTML = name
+        div.appendChild(ele)
+        div.appendChild(nameele)
+        document.getElementById("chatlog").appendChild(div)
         console.log(arg)
       })
     </script>
