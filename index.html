@@ -90,23 +90,24 @@
         let ele = document.createElement("p")
         let div = document.createElement("div")
         div.style.innerText = userid
-        div.style.class = "msg"
+        div.className = "msg"
         if (userid == id) {
-          ele.style.class = "me"
+          ele.className = "me"
         } else {
-          ele.style.class = "other"
+          ele.className = "other"
         }
         let nameele = document.createElement("name")
         ele.innerHTML = msg
         nameele.innerHTML = name
         div.appendChild(ele)
         div.appendChild(nameele)
-        if ()
+        if (!(document.getElementById("chatlog").childNodes.length === 0)) {
           let lastmsg = document.getElementById("chatlog").lastElementChild;
           if (lastmsg.style.innerText == id) {
-            lastmsg.style.class = "msgown"
+            lastmsg.className = "msgown"
             lastmsg.lastElementChild.remove()
           }
+        }
         
         document.getElementById("chatlog").appendChild(div)
         
