@@ -34,7 +34,7 @@
         border-radius : 5px;
         margin:5px;
         max-width : 300px;
-        min-width : 50px;
+        min-width : 75px;
       }
       name {
         position : relative;
@@ -44,14 +44,14 @@
         color : gray;
       }
       .msg {
-        margin-bottom : 2px;
+        margin-bottom : -2px;
         float : left;
         clear: left;
         clear : right;
       }
       .msgown {
-        margin-bottom : 2px;
-        float : left;
+        margin-bottom : -2px;
+        float : right;
         clear: left;
         clear : right;
       }
@@ -60,7 +60,6 @@
         height : 600px;
         overflow-y : scroll;
         border: 3px solid black;
-        overflow-x : none;
       }
     </style>
   </head>
@@ -125,6 +124,39 @@
         }
         
         document.getElementById("chatlog").appendChild(div)
+        if (!(document.visibilityState === 'visible')) {
+          const notifyMe = () => {
+            if (!window.Notification) {
+              console.log('Browser does not support notifications.')
+            } else {
+              // check if permission is already granted
+              if (Notification.permission === 'granted') {
+                // show notification here
+                const notify = new Notification('Hi there!', {
+                  body: 'How are you doing?',
+                  icon: 'https://bit.ly/2DYqRrh'
+                })
+              } else {
+                // request permission from the user
+                Notification.requestPermission()
+                  .then(function (p) {
+                    if (p === 'granted') {
+                      // show notification here
+                      const notify = new Notification('Hi there!', {
+                        body: 'How are you doing?',
+                        icon: 'https://bit.ly/2DYqRrh'
+                      })
+                    } else {
+                      console.log('User has blocked notifications.')
+                    }
+                  })
+                  .catch(function (err) {
+                    console.error(err)
+                  })
+              }
+            }
+          }
+        }
       })
     </script>
   </body>
