@@ -50,6 +50,8 @@
       .msgown {
         margin-bottom : -2px;
         float : right;
+        margin-left: auto;
+        order: 2;
       }
       .logs {
         display : flex;
@@ -100,6 +102,13 @@
       }
       var id = generate(20)
       var socket = io();
+      socket.on("connection", function () {
+        /*
+        if (!document.hasFocus()) {
+          notifyMe()
+        }
+        */
+      })
       //type js here
       document.getElementById("chatinput").addEventListener("keyup", function (e) {
         console.log("pressed")
@@ -145,9 +154,6 @@
         
         document.getElementById("chatlog").appendChild(div)
         // request permission on page load
-        if (!document.hasFocus()) {
-          notifyMe()
-        }
       })
     </script>
   </body>
