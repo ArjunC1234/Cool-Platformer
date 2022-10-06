@@ -21,8 +21,8 @@
       p {
         color : white;
         margin:5px;
-        width : max-content;
-        height : min-content + 25px;
+        width : fit;
+        max-width : 300px;
         border-radius : 12px;
         background-color : blue;
       }
@@ -54,6 +54,9 @@
       })
       socket.on("chat message", function(arg) {
         let ele = document.createElement("p")
+        let div = document.createElement("div")
+        let name = document.createElement("name")
+        
         ele.innerHTML = arg
         document.getElementById("chatlog").appendChild(ele)
         console.log(arg)
