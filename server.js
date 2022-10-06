@@ -17,7 +17,7 @@ io.on('connection', (socket) => {
   socket.on('chat message', (msg) => {
     let arr = msg.split(" |123828749270183718748148124781247723616199374286| ")
     let str = arr[1] + ": " + arr[0]
-    io.sockets.emit('chat message', str)
+    io.sockets.emit('chat message', msg)
   });
 });
 
