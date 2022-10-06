@@ -36,8 +36,8 @@
         overflow-x : wrap;
         word-wrap: break-word;
         height : min-content;
-        max-width : 500px;
-        min-width : 75px;
+        max-width : 300px;
+        width : max-content;
       }
       name {
         position : relative;
@@ -147,13 +147,19 @@
         if (userid == id) {
           ele.className = "me"
           div.className = "msgown"
+          nameele.style.float = "right"
+          nameele.style.right = "-10px"
+          nameele.style.top = "-2px"
         } else {
           ele.className = "other"
         }
         ele.innerHTML = msg
         nameele.innerHTML = name
         div.appendChild(ele)
-        div.appendChild(nameele)
+        if (userid != id) {
+          div.appendChild(nameele)
+        }
+        
         if (!(document.getElementById("chatlog").childNodes.length === 0)) {
           let lastmsg = document.getElementById("chatlog").lastElementChild;
           if (lastmsg.style.innerText == userid && userid != id) {
