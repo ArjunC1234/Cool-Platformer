@@ -168,14 +168,6 @@
       });
       socket.on("chat message", function(name, msg, userid) {
         var chatlog = document.getElementById("chatlog")
-        /*
-        if (chatlog.scrollTop + chatlog.offsetHeight === chatlog.scrollHeight) {
-          let scroll = true
-          console.log("fufheiwuh")
-        } else {
-          scroll = false
-        }
-        */
         let ele = document.createElement("p")
         let div = document.createElement("div")
         let nameele = document.createElement("name")
