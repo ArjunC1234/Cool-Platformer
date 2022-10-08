@@ -5,203 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <style>
-      h1 {
-        font-family : "Verdana";
-        font-size : 30px;
-        width : max-content;
-      }
-      input {
-        height : 30px;
-        background-color : lightgray;
-        font-size : 20px;
-        border : none;
-      }
-      #user {
-        width : 150px;
-        position : relative;
-        border-right : 2px solid black;
-      }
-      #chatinput {
-        width : 450px;
-        position : relative;
-        right :0px;
-        left :0px;
-        border-right : 2px solid black;
-      }
-      .other {
-        color : black;
-        background-color : lightgray;
-      }
-      .me {
-        color : white;
-        background-color : blue;
-      }
-      p {
-        padding:5px;
-        padding-left : 8px;
-        padding-right : 8px;
-        font-family: cursive;
-        border-radius : 5px;
-        margin:5px;
-        overflow-x : wrap;
-        word-wrap: break-word;
-        height : min-content;
-        max-width : 300px;
-        min-width : 115px;
-        width : max-content;
-      }
-      name {
-        position : relative;
-        top : -7px;
-        left : 7px;
-        font-size : 17px;
-        color : lightgray;
-      }
-      .msg {
-        margin-bottom : -8px;
-        float : left;
-      }
-      .msgown {
-        margin-bottom : -8px;
-        float : right;
-        margin-left: auto;
-        
-      }
-      .sendbtn {
-        width : 88px;
-        height : 32px;
-        margin-left:0px;
-        margin-right: 0px;
-        padding:0px;
-        font-size : 25px;
-        font-family : "Verdana";
-        border-radius : 0px;
-        border : none;
-      }
-      .logs {
-        display : flex;
-        flex-direction : column;
-        width : 700px;
-        height : 600px;
-        overflow-y : scroll;
-        border: 3px solid black;
-        background : linear-gradient(0deg, rgba(0,0,0,0.8), rgba(0,0,0,0.2)), url("https://cdn.glitch.global/8aa95058-d14f-4453-bd36-48a32cf17f84/286383.jpg?v=1665074100928");
-        background-repeat : no-repeat;
-        background-size : cover;
-      }
-      .controls {
-        display: flex;
-        flex-direction: row;
-        flex-wrap : none;
-        border : 3px solid black;
-        width : max-content;
-      }
     </style>
   </head>
-  <body style="display: grid; place-items: center; overflow : hidden; background-color: black;">
+  <body>
     <!--TYPE HTML HERE-->
-    <div id="chatcontainer">
-      <div class="logs" id="chatlog"></div>
-      <div id="controlscontainer" class="controls">
-        <input type="text" id="user" placeholder="type name here" maxlength="12">
-        <input type="text" id="chatinput" placeholder="type text here">
-        <button id="sendbtn" class="sendbtn">
-          Send
-        </button>
-      </div>
-    </div>
     
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        function notifyMe(name) {
-         if (Notification.permission !== 'granted')
-          Notification.requestPermission();
-         else {
-          var notification = new Notification('New Message! (chatroom)', {
-           body: name
-          });
-          notification.onclick = function() {
-           window.open('http://mychatroom.glitch.me', '_blank').focus();
-          };
-         }
-        }
-      function generate(n) {
-        var add = 1, max = 12 - add;   // 12 is the min safe number Math.random() can generate without it starting to pad the end with zeros.   
-        
-        if ( n > max ) {
-                return generate(max) + generate(n - max);
-        }
-        
-        max        = Math.pow(10, n+add);
-        var min    = max/10; // Math.pow(10, n) basically
-        var number = Math.floor( Math.random() * (max - min + 1) ) + min;
-        
-        return ("" + number).substring(add); 
-      }
+      var users = []
+
       var id = generate(20)
       var socket = io();
-      socket.on("connection", function () {
-        /*
-        if (!document.hasFocus()) {
-          notifyMe()
-        }
-        */
-      })
-      //type js here
-      document.getElementById("chatinput").addEventListener("keyup", function (e) {
-        console.log("pressed")
-        if (e.key == "Enter" && document.getElementById("chatinput").value.trim() != '' && document.getElementById("user").value.trim() != '') {
-          let msg = document.getElementById("chatinput").value
-          let name = document.getElementById("user").value
-          socket.emit("chat message", name, msg, id)
-          document.getElementById("chatinput").value = ''
-        }
-      })
-      document.addEventListener('DOMContentLoaded', function() {
-        if (!Notification) {
-        alert('Desktop notifications not available in your browser. Try Chromium.');
-        return;
-        }
 
-        if (Notification.permission !== 'granted')
-        Notification.requestPermission();
-      });
+      //type js here
       socket.on("chat message", function(name, msg, userid) {
-        var chatlog = document.getElementById("chatlog")
-        let ele = document.createElement("p")
-        let div = document.createElement("div")
-        let nameele = document.createElement("name")
-        div.style.innerText = userid
-        div.className = "msg"
-        if (userid == id) {
-          ele.className = "me"
-          div.className = "msgown"
-          nameele.style.float = "right"
-          nameele.style.right = "-10px"
-          nameele.style.top = "-2px"
-        } else {
-          ele.className = "other"
-        }
-        ele.innerHTML = msg
-        nameele.innerHTML = name
-        div.appendChild(ele)
-        if (userid != id) {
-          div.appendChild(nameele)
-        }
         
-        if (!(document.getElementById("chatlog").childNodes.length === 0)) {
-          let lastmsg = document.getElementById("chatlog").lastElementChild;
-          if (lastmsg.style.innerText == userid && userid != id) {
-            lastmsg.lastElementChild.remove()
-          }
-        }
-        
-        document.getElementById("chatlog").appendChild(div)
-        //if (scroll) {
-          chatlog.scrollTo(0, chatlog.scrollHeight);
-        //}
-        // request permission on page load
-      })
+      }
     </script>
   </body>
 </html>
