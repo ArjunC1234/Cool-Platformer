@@ -48,12 +48,56 @@
       socket.on("c", function(userid) {
         users.push(new Corcle(userid))
       })
+      socket.on("move", function(userid, left, top) {
+        let ele = document.getElementById(userid)
+        ele.style.left -= ""
+      })
+      var w = false
+      var s = false
+      var a = false
+      var d = false
       window.addEventListener("keydown", function (e) {
         if (e.key == "w") {
-          
+          w = true
+        }
+        if (e.key == "s") {
+          s = true
+        }
+        if (e.key == "a") {
+          a = true
+        }
+        if (e.key == "d") {
+          d = true
         }
       })
-      wi
+      window.addEventListener("keyup", function (e) {
+        if (e.key == "w") {
+          w = false
+        }
+        if (e.key == "s") {
+          s = false
+        }
+        if (e.key == "a") {
+          a = false
+        }
+        if (e.key == "d") {
+          d = false
+        }
+      })
+      setInterval(function() {
+        if (w) {
+          socket.emit('move', id, '0', '-1')
+        }
+        if (s) {
+          socket.emit('move', id, '0', '1')
+        }
+        if (a) {
+          socket.emit('move', id, '-1', '0')
+        }
+        if (d) {
+          socket.emit('move', id, '1', '0')
+        }
+      }, 10)
     </script>
   </body>
 </html>
