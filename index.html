@@ -35,14 +35,19 @@
         document.body.appendChild(ele)
         this.ele = document.getElementById(id)
       }
-      users.push(new Corcle(id))
       var socket = io();
       socket.emit("connect", id)
       //type js here
-      socket.on("disconnect", function(id) {
-        
-      }
-      socket.on("connect")
+      socket.on("disconnect", function(userid) {
+        for (var i = 0; i < users.length; i++) {
+          if (users[i].id == userid) {
+            users.splice(i, 1)
+          }
+        }
+      })
+      socket.on("connect", function(userid) {
+        users.push(new Corcle(userid))
+      })
     </script>
   </body>
 </html>
