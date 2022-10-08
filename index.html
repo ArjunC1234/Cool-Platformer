@@ -36,16 +36,16 @@
         this.ele = document.getElementById(id)
       }
       var socket = io();
-      socket.emit("connect", id)
+      socket.emit("c", id)
       //type js here
-      socket.on("disconnect", function(userid) {
+      socket.on("dc", function(userid) {
         for (var i = 0; i < users.length; i++) {
           if (users[i].id == userid) {
             users.splice(i, 1)
           }
         }
       })
-      socket.on("connect", function(userid) {
+      socket.on("c", function(userid) {
         users.push(new Corcle(userid))
       })
     </script>
