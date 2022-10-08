@@ -27,6 +27,12 @@
         return ("" + number).substring(add); 
       }
       var id = generate(20)
+      function Corcle(id) {
+        this.id = id
+        let ele = document.createElement("div")
+        ele.style = "position: absolute; left: 100px; top: 100px; width : 100px; height : 100px; border-radius: 25px; background-color: yellow;"
+        document.body.appendChild(ele)
+      }
       var socket = io();
       socket.emit("connect", id)
       //type js here
