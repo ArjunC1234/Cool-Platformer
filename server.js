@@ -10,7 +10,9 @@ app.get("/", (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  socket.on('move', (id, left, right))
+  socket.on('move', (id, left, top) => {
+    io.sockets.emit('move', id, left, top)
+  })
   socket.on('c', (id) => {
     io.sockets.emit('c', id)
   });
