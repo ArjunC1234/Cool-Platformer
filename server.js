@@ -10,16 +10,16 @@ app.get("/", (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  socket.on('dc', (id) => {
-    io.sockets.emit('disconnected', id)
+  socket.on('connect', (id) => {
+    io.sockets.emit('connect', id)
+  });
+  socket.on('disconnect', (id) => {
+    io.sockets.emit('disconnect', id)
   });
   
   socket.on('chat message', (name, msg, id) => {
     io.sockets.emit('chat message', name, msg, id)
   });
-  socket.on('connect', (id) >= {
-    console.log(id)
-  })
 });
 
 

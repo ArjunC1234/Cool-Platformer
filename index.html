@@ -28,9 +28,9 @@
       }
       var id = generate(20)
       var socket = io();
-
+      socket.emit("connect", id)
       //type js here
-      socket.on("chat message", function(name, msg, userid) {
+      socket.on("disconnect", function(id) {
         
       }
     </script>
