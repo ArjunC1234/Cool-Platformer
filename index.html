@@ -50,7 +50,9 @@
       })
       socket.on("move", function(userid, left, top) {
         let ele = document.getElementById(userid)
-        ele.style.left -= ""
+        console.log("herro")
+        ele.style.left += left + "px"
+        ele.style.top += top + "px"
       })
       var w = false
       var s = false
