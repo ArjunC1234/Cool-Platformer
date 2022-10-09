@@ -29,8 +29,9 @@
       var id = generate(20).toString()
       function Corcle(id) {
         this.id = id
+        let color = '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
         let ele = document.createElement("div")
-        ele.style = "position: absolute; left: 100px; top: 100px; width : 100px; height : 100px; border-radius: 25px; background-color: yellow;"
+        ele.style = `position: absolute; left: 100px; top: 100px; width : 100px; height : 100px; border-radius: 25px; background-color: ${color};`
         ele.id = id
         document.body.appendChild(ele)
         this.ele = document.getElementById(id)
@@ -38,27 +39,26 @@
       var socket = io();
       socket.emit("c", id)
       //type js here
-      socket.on("c", function(userid, socket) {
-        users.push(new Corcle(userid, socket))
+      socket.on("c", function(userid) {
+        users.push(new Corcle(userid))
         if (userid == id) {
           socket.emit("getOthers", id)
-          console.log("getOthers")
         }
       })
       socket.on()
       socket.on("getOthers", function(userid) {
         if (userid != id) {
           let ele = document.getElementById(id)
-          socket.emit("sendOthers", userid, socket, id, ele.style.left, ele.style.top)
+          socket.emit("sendOthers", userid, id, ele.style.left, ele.style.top, ele.style.backgroundColor)
         }
       })
-      socket.on("sendOthers", function(idTo, socket, idFrom, left, top) {
+      socket.on("sendOthers", function(idTo, idFrom, left, top, color) {
         if (id == idTo) {
           users.push(new Corcle(idFrom))
           let ele = document.getElementById(idFrom)
+          ele.style.backgroundColor = color
           ele.style.left = left
           ele.style.top = top
-          console.log("Received.")
         }
       })
       socket.on("move", function(userid, left, top) {
@@ -106,16 +106,16 @@
       })
       setInterval(function() {
         if (w) {
-          socket.emit('move', id, '0', '-1')
+          socket.emit('move', id, '0', '-10')
         }
         if (s) {
-          socket.emit('move', id, '0', '1')
+          socket.emit('move', id, '0', '10')
         }
         if (a) {
-          socket.emit('move', id, '-1', '0')
+          socket.emit('move', id, '-10', '0')
         }
         if (d) {
-          socket.emit('move', id, '1', '0')
+          socket.emit('move', id, '10', '0')
         }
       }, 10)
     </script>

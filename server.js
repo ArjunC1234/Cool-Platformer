@@ -22,8 +22,8 @@ io.on('connection', (socket) => {
   socket.on('getOthers', (id) => {
     io.sockets.emit('getOthers', id)
   });
-  socket.on('sendOthers', (idTo, idFrom, left, top) => {
-    io.sockets.emit('sendOthers', idTo, idFrom, left, top)
+  socket.on('sendOthers', (idTo, idFrom, left, top, color) => {
+    io.sockets.emit('sendOthers', idTo, idFrom, left, top, color)
   });
 });
 
