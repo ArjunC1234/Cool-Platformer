@@ -5,10 +5,24 @@ const port = process.env.PORT || 3000;;
 
 app.set("trust proxy", true);
 
-function Handler =
+function Handler () {
+  this.users = []
+  this.addUser = (socket, displayname) => {
+    let address = socket.handshake.address
+    this.users.push({
+      ip : address.address,
+      port : address.port,
+      displayName : displayname,
+      data : {}
+    })
+  }
+  this.getUser = (client=false) => {
+    
+  }
+}
 
   
-  app.get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
