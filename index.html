@@ -18,19 +18,26 @@
         ele.style = `position: absolute; left: 100px; top: 100px; width : 100px; height : 100px; border-radius: 25px; background-color: ${color};`
         ele.id = id
         document.body.appendChild(ele)
-        this.ele = document.getElementById(id)
       }
       var socket = io();
       var client_users = []
       socket.on("user joined", function (id, users) {
         client_users = users
+        Corcle(id)
       })
       socket.on("user left", function (id, users) {
         client_users = users
-        document.getElementById("")
+        document.getElementById(id).remove()
       })
       socket.on("updateGame", function (users) {
-        var client_users = users
+        if (users.length > 0) {
+          var client_users = users
+          for (var i = 0; i < client_users.length; i++) {
+            let user = client_users[i]
+            document.getElementById(user.id).style.left = user.data.x
+            document.getElementById(user.id).style.top = user.data.y
+          }
+        }
       })
       var w = false
       var s = false
@@ -66,16 +73,16 @@
       })
       setInterval(function() {
         if (w) {
-          socket.emit('move', id, '0', '-10')
+          socket.emit('updateUser', "y", -3)
         }
         if (s) {
-          socket.emit('move', id, '0', '10')
+          socket.emit('updateUser', "y", 3)
         }
         if (a) {
-          socket.emit('move', id, '-10', '0')
+          socket.emit('updateUser', "x", -3)
         }
         if (d) {
-          socket.emit('move', id, '10', '0')
+          socket.emit('updateUser', "x", 3)
         }
       }, 10)
     </script>
