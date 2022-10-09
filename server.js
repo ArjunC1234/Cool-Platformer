@@ -39,17 +39,23 @@ app.get("/", (req, res) => {
 
 io.on('connection', (socket) => {
   let user = game.addUser(socket.id)
+  user.data = {
+    x : "100px",
+    y : "100px"
+  }
+  io.emit("user joined", socket.id, game.users)
   user.displayName =  "Tim Markle"
   socket.on('updateUser', (data) => {
     game.getUser("id", socket.id).data = data
   })
   socket.on('disconnect', function(){
     game.delUser(socket.id)
+    io.emit("user left", socket.id, game.users)
   });
 });
 
 setInterval(function () {
-  io.sockets.emit("updateGame", game.users)
+  io.emit("updateGame", game.users)
 }, 50)
 
 

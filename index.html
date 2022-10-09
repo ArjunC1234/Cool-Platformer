@@ -12,7 +12,6 @@
     
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      var id = generate(20).toString()
       function Corcle(id) {
         let color = '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
         let ele = document.createElement("div")
@@ -22,6 +21,17 @@
         this.ele = document.getElementById(id)
       }
       var socket = io();
+      var client_users = []
+      socket.on("user joined", function (id, users) {
+        client_users = users
+      })
+      socket.on("user left", function (id, users) {
+        client_users = users
+        document.getElementById("")
+      })
+      socket.on("updateGame", function (users) {
+        var client_users = users
+      })
       var w = false
       var s = false
       var a = false
