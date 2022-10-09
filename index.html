@@ -48,7 +48,17 @@
       socket.on("c", function(userid) {
         users.push(new Corcle(userid))
         if (userid == id) {
-          socket.emit("getOtherCoords")
+          socket.emit("getOthers", id)
+        }
+      })
+      socket.on("getOthers", function(userid) {
+        if (userid != id) {
+          socket.emit("sendOthers", id,  userid)
+        }
+      })
+      socket.on("sendOthers", function(userid) {
+        if (userid != id) {
+          socket.emit("sendOthers", id, userid)
         }
       })
       socket.on("move", function(userid, left, top) {
