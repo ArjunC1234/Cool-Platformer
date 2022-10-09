@@ -22,13 +22,8 @@ function Handler () {
     }
   }
   this.getUser = (getBy, info) => {
-    if (getBy == "client") {
-      let address = info.handshake.address
-    }
     for (var i = 0; i < this.users.length; i++) {
-      if (getBy == "client") {
-        if (this.users[i].)
-      }
+      if (this.users[i][getBy] == )
     }
   }
 }
