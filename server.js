@@ -7,33 +7,37 @@ app.set("trust proxy", true);
 
 function Handler () {
   this.users = []
-  this.addUser = (socket, displayname) => {
+  this.addUser = (id) => {
     this.users.push({
-      id : socket.id,
-      displayName : displayname,
+      id : id,
+      displayName : "",
       data : {}
     })
   }
-  this.delUser = (socket) => {
+  this.delUser = (id) => {
     for (var i = 0; i < this.users.length; i++) {
-      if (this.users[i].id == socket.id) {
+      if (this.users[i].id == id) {
         this.users.splice(i, 1)
       }
     }
   }
-  this.getUser = (getBy, info) => {
+  this.getUser = (getBy, value) => {
     for (var i = 0; i < this.users.length; i++) {
-      if (this.users[i][getBy] == )
+      if (this.users[i][getBy] == value) {
+        return this.users[i]
+      }
     }
   }
 }
 
+var game = new Handler()
   
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
 io.on('connection', (socket) => {
+  game.addUser(socket.id)
   socket.on('move', (id, left, top) => {
     io.sockets.emit('move', id, left, top)
   })
@@ -50,6 +54,10 @@ io.on('connection', (socket) => {
     io.sockets.emit('sendOthers', idTo, idFrom, left, top, color)
   });
 });
+
+setInterval(function () {
+  io.emit("updateGame", game.users)
+}, 50)
 
 
 http.listen(port, () => {
