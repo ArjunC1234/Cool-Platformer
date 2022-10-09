@@ -16,15 +16,17 @@ io.on('connection', (socket) => {
   socket.on('c', (id) => {
     io.sockets.emit('c', id)
   });
-  socket.on('disconnect', (id) => {
-    
-    io.sockets.emit('dc', id)
+  socket.on('disconnect', () => {
+    socket.emit("dc")
   });
+  socket.on('dc', () => {
+    io.sockets.emit("dc")
+  })
   socket.on('getOthers', (id) => {
     io.sockets.emit('getOthers', id)
   });
-  socket.on('sendOthers', (id) => {
-    io.sockets.emit('sendOthers', id)
+  socket.on('sendOthers', (idTo, idFrom, left, top) => {
+    io.sockets.emit('sendOthers', idTo, idFrom, left, top)
   });
 });
 

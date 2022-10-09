@@ -42,6 +42,7 @@
         for (var i = 0; i < users.length; i++) {
           if (users[i].id == userid) {
             users.splice(i, 1)
+            document.getElementById(userid).remove()
           }
         }
       })
@@ -53,16 +54,21 @@
       })
       socket.on("getOthers", function(userid) {
         if (userid != id) {
-          socket.emit("sendOthers", id,  userid)
+          socket.emit("sendOthers", userid,  id, left, top)
         }
       })
-      socket.on("sendOthers", function(userid) {
-        if (userid != id) {
-          socket.emit("sendOthers", id, userid)
+      socket.on("sendOthers", function(idTo, idFrom, left, top) {
+        if (id == idTo) {
+          users.push(new Corcle(idFrom))
+          let ele = document.getElementById(idFrom)
+          ele.style.left = left
+          ele.style.top = top
         }
       })
       socket.on("move", function(userid, left, top) {
-        let ele = document.getElementById(userid)
+        for (var i = 0; i < users.length; i++) {
+          if (userid)
+        }
         let leftele = (parseInt(ele.style.left.split("px")[0]) + parseInt(left)).toString() + "px"
         let topele = (parseInt(ele.style.top.split("px")[0]) + parseInt(top)).toString() + "px"
         ele.style.left = leftele
