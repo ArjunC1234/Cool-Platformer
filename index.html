@@ -47,12 +47,17 @@
       })
       socket.on("c", function(userid) {
         users.push(new Corcle(userid))
+        if (userid == id) {
+          socket.emit("getOtherCoords")
+        }
       })
       socket.on("move", function(userid, left, top) {
         let ele = document.getElementById(userid)
-        console.log("herro")
-        ele.style.left += left + "px"
-        ele.style.top += top + "px"
+        let leftele = (parseInt(ele.style.left.split("px")[0]) + parseInt(left)).toString() + "px"
+        let topele = (parseInt(ele.style.top.split("px")[0]) + parseInt(top)).toString() + "px"
+        ele.style.left = leftele
+        ele.style.top = topele
+        console.log(leftele, topele)
       })
       var w = false
       var s = false
