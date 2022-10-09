@@ -8,16 +8,28 @@ app.set("trust proxy", true);
 function Handler () {
   this.users = []
   this.addUser = (socket, displayname) => {
-    let address = socket.handshake.address
     this.users.push({
-      ip : address.address,
-      port : address.port,
+      id : socket.id,
       displayName : displayname,
       data : {}
     })
   }
-  this.getUser = (client=false) => {
-    
+  this.delUser = (socket) => {
+    for (var i = 0; i < this.users.length; i++) {
+      if (this.users[i].id == socket.id) {
+        this.users.splice(i, 1)
+      }
+    }
+  }
+  this.getUser = (getBy, info) => {
+    if (getBy == "client") {
+      let address = info.handshake.address
+    }
+    for (var i = 0; i < this.users.length; i++) {
+      if (getBy == "client") {
+        if (this.users[i].)
+      }
+    }
   }
 }
 
