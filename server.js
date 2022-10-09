@@ -38,12 +38,13 @@ app.get("/", (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  game.addUser(socket.id)
+  let user = game.addUser(socket.id)
+  user.displayName =  "Tim Markle"
   socket.on('updateUser', (data) => {
-    io.emit()
+    game.getUser("id", socket.id).data = data
   })
   socket.on('disconnect', function(){
-    
+    game.delUser(socket.id)
   });
 });
 
