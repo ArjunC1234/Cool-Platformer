@@ -38,42 +38,39 @@
       var socket = io();
       socket.emit("c", id)
       //type js here
-      socket.on("dc", function(userid) {
-        for (var i = 0; i < users.length; i++) {
-          if (users[i].id == userid) {
-            users.splice(i, 1)
-            document.getElementById(userid).remove()
-          }
-        }
-      })
-      socket.on("c", function(userid) {
-        users.push(new Corcle(userid))
+      socket.on("c", function(userid, socket) {
+        users.push(new Corcle(userid, socket))
         if (userid == id) {
           socket.emit("getOthers", id)
+          console.log("getOthers")
         }
       })
+      socket.on()
       socket.on("getOthers", function(userid) {
         if (userid != id) {
-          socket.emit("sendOthers", userid,  id, left, top)
+          let ele = document.getElementById(id)
+          socket.emit("sendOthers", userid, socket, id, ele.style.left, ele.style.top)
         }
       })
-      socket.on("sendOthers", function(idTo, idFrom, left, top) {
+      socket.on("sendOthers", function(idTo, socket, idFrom, left, top) {
         if (id == idTo) {
           users.push(new Corcle(idFrom))
           let ele = document.getElementById(idFrom)
           ele.style.left = left
           ele.style.top = top
+          console.log("Received.")
         }
       })
       socket.on("move", function(userid, left, top) {
         for (var i = 0; i < users.length; i++) {
-          if (userid)
+          if (users[i].id == userid) {
+            let ele = document.getElementById(userid)
+            let leftele = (parseInt(ele.style.left.split("px")[0]) + parseInt(left)).toString() + "px"
+            let topele = (parseInt(ele.style.top.split("px")[0]) + parseInt(top)).toString() + "px"
+            ele.style.left = leftele
+            ele.style.top = topele
+          }
         }
-        let leftele = (parseInt(ele.style.left.split("px")[0]) + parseInt(left)).toString() + "px"
-        let topele = (parseInt(ele.style.top.split("px")[0]) + parseInt(top)).toString() + "px"
-        ele.style.left = leftele
-        ele.style.top = topele
-        console.log(leftele, topele)
       })
       var w = false
       var s = false

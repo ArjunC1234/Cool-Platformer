@@ -19,9 +19,6 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     socket.emit("dc")
   });
-  socket.on('dc', () => {
-    io.sockets.emit("dc")
-  })
   socket.on('getOthers', (id) => {
     io.sockets.emit('getOthers', id)
   });
