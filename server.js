@@ -5,7 +5,10 @@ const port = process.env.PORT || 3000;;
 
 app.set("trust proxy", true);
 
-app.get("/", (req, res) => {
+function Handler =
+
+  
+  app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
