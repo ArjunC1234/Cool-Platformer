@@ -13,6 +13,7 @@ function Handler () {
       displayName : "",
       data : {}
     })
+    return this.getUser("id", id)
   }
   this.delUser = (id) => {
     for (var i = 0; i < this.users.length; i++) {
@@ -38,25 +39,16 @@ app.get("/", (req, res) => {
 
 io.on('connection', (socket) => {
   game.addUser(socket.id)
-  socket.on('move', (id, left, top) => {
-    io.sockets.emit('move', id, left, top)
+  socket.on('updateUser', (data) => {
+    io.emit()
   })
-  socket.on('c', (id) => {
-    io.sockets.emit('c', id)
-  });
-  socket.on('disconnect', () => {
-    socket.emit("dc")
-  });
-  socket.on('getOthers', (id) => {
-    io.sockets.emit('getOthers', id)
-  });
-  socket.on('sendOthers', (idTo, idFrom, left, top, color) => {
-    io.sockets.emit('sendOthers', idTo, idFrom, left, top, color)
+  socket.on('disconnect', function(){
+    
   });
 });
 
 setInterval(function () {
-  io.emit("updateGame", game.users)
+  io.sockets.emit("updateGame", game.users)
 }, 50)
 
 
