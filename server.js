@@ -38,13 +38,15 @@ app.get("/", (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  let user = game.addUser(socket.id)
-  user.data = {
-    x : 100,
-    y : 100
-  }
-  io.emit("user joined", socket.id, game.users)
-  user.displayName =  "Tim Markle"
+  socket.on("user joined", () => {
+    let user = game.addUser(socket.id)
+    user.data = {
+      x : 100,
+      y : 100
+    }
+    user.displayName =  "Tim Markle"
+    io.emit("user joined", socket.id, game.users)
+  })
   socket.on('updateUser', (data) => {
     game.getUser("id", socket.id).data = data
   })

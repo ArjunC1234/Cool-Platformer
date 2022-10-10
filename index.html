@@ -21,6 +21,12 @@
       }
       var socket = io();
       var client_users = []
+      socket.on("connect", function () {
+        
+      })
+      socket.on("disconnect", () => {
+        socket.emit("user left"); // undefined
+      });
       socket.on("user joined", function (id, users) {
         client_users = users
         Corcle(id)
@@ -28,14 +34,15 @@
       socket.on("user left", function (id, users) {
         client_users = users
         document.getElementById(id).remove()
+        console.log("left")
       })
       socket.on("updateGame", function (users) {
         if (users.length > 0) {
           var client_users = users
           for (var i = 0; i < client_users.length; i++) {
             let user = client_users[i]
-            document.getElementById(user.id).style.left = user.data.x
-            document.getElementById(user.id).style.top = user.data.y
+            document.getElementById(user.id).style.left = user.data.x.toString() + "px"
+            document.getElementById(user.id).style.top = user.data.y.toString() + "px"
           }
         }
       })
