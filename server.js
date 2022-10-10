@@ -8,11 +8,13 @@ app.set("trust proxy", true);
 function Handler () {
   this.users = []
   this.addUser = (id) => {
-    this.users.push({
-      id : id,
-      displayName : "",
-      data : {}
-    })
+    if (this.getUser("id", id) == false) {
+      this.users.push({
+        id : id,
+        displayName : "",
+        data : {}
+      })
+    }
     return this.getUser("id", id)
   }
   this.delUser = (id) => {
@@ -28,6 +30,7 @@ function Handler () {
         return this.users[i]
       }
     }
+    return false
   }
 }
 
@@ -39,12 +42,14 @@ app.get("/", (req, res) => {
 
 io.on('connection', (socket) => {
   socket.on("user joined", () => {
+    console.log(game.users)
     let user = game.addUser(socket.id)
     user.data = {
       x : 100,
       y : 100,
       color : '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')
     }
+    console.log(game.users)
     user.displayName =  "Tim Markle"
     io.emit("user joined", socket.id, game.users, user.data.color)
   })
