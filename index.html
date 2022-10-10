@@ -28,8 +28,13 @@
       });
       socket.on("user joined", function (id, users, color) {
         client_users = users
-        Corcle(id, color)
-
+        if (id == socket.id) {
+          for (var i = 0; i < client_users.length; i++) {
+            Corcle(client_users[i].id, client_users[i].data.color)
+          }
+        } else {
+          Corcle(id, color)
+        }
       })
       socket.on("user left", function (id, users) {
         client_users = users
