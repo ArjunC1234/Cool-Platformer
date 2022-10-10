@@ -12,10 +12,11 @@
     
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      function Corcle(id, color) {
+      function Corcle(id, color, displayName) {
         let ele = document.createElement("div")
         ele.style = `position: absolute; left: 100px; top: 100px; width : 100px; height : 100px; border-radius: 25px; background-color: ${color};`
         ele.id = id
+        ele.innerHTML = displayName
         document.body.appendChild(ele)
       }
       var socket = io();
@@ -26,14 +27,18 @@
       socket.on("disconnect", () => {
         socket.emit("user left"); // undefined
       });
-      socket.on("user joined", function (id, users, color) {
+      socket.on("user joined", function (id, users) {
         client_users = users
         if (id == socket.id) {
           for (var i = 0; i < client_users.length; i++) {
-            Corcle(client_users[i].id, client_users[i].data.color)
+            Corcle(client_users[i].id, client_users[i].data.color, client_users[i].displayName)
           }
         } else {
-          Corcle(id, color)
+          for (var i = 0; i < client_users.length; i++) {
+            if (client_users[i].id == id) {
+              Corcle(client_users[i].id, client_users[i].data.color, client_users[i].displayName)
+            }
+          }
         }
       })
       socket.on("user left", function (id, users) {

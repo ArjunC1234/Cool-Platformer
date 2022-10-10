@@ -51,7 +51,7 @@ io.on('connection', (socket) => {
     }
     console.log(game.users)
     user.displayName =  "Tim Markle"
-    io.emit("user joined", socket.id, game.users, user.data.color)
+    io.emit("user joined", socket.id, game.users)
     socket.emit("updateGame", game.users)
   })
   socket.on('disconnect', function(){
