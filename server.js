@@ -42,13 +42,15 @@ io.on('connection', (socket) => {
     let user = game.addUser(socket.id)
     user.data = {
       x : 100,
-      y : 100
+      y : 100,
+      color : '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')
     }
     user.displayName =  "Tim Markle"
-    io.emit("user joined", socket.id, game.users)
+    io.emit("user joined", socket.id, game.users, user.data.color)
   })
-  socket.on('updateUser', (data) => {
-    game.getUser("id", socket.id).data = data
+  socket.on('updateUser', (dataKey, value) => {
+    game.getUser("id", socket.id).data[dataKey] = value
+    socket.emit("updateGame", game.users)
   })
   socket.on('disconnect', function(){
     game.delUser(socket.id)
@@ -58,10 +60,6 @@ io.on('connection', (socket) => {
     game.getUser("id", socket.id).data[dataKey] += value
   })
 });
-
-setInterval(function () {
-  io.emit("updateGame", game.users)
-}, 50)
 
 
 http.listen(port, () => {

@@ -12,8 +12,7 @@
     
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      function Corcle(id) {
-        let color = '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
+      function Corcle(id, color) {
         let ele = document.createElement("div")
         ele.style = `position: absolute; left: 100px; top: 100px; width : 100px; height : 100px; border-radius: 25px; background-color: ${color};`
         ele.id = id
@@ -22,14 +21,15 @@
       var socket = io();
       var client_users = []
       socket.on("connect", function () {
-        
+        socket.emit("user joined")
       })
       socket.on("disconnect", () => {
         socket.emit("user left"); // undefined
       });
-      socket.on("user joined", function (id, users) {
+      socket.on("user joined", function (id, users, color) {
         client_users = users
-        Corcle(id)
+        Corcle(id, color)
+
       })
       socket.on("user left", function (id, users) {
         client_users = users
@@ -41,8 +41,8 @@
           var client_users = users
           for (var i = 0; i < client_users.length; i++) {
             let user = client_users[i]
-            document.getElementById(user.id).style.left = user.data.x.toString() + "px"
-            document.getElementById(user.id).style.top = user.data.y.toString() + "px"
+            document.getElementById(user.id).style.left = user.data.x + "px"
+            document.getElementById(user.id).style.top = user.data.y + "px"
           }
         }
       })
