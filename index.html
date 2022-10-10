@@ -84,7 +84,7 @@
           d = false
         }
       })
-      setInterval(function() {
+      setInterval(function () {
         if (w) {
           socket.emit('updateUser', "y", -3)
         }
@@ -97,7 +97,7 @@
         if (d) {
           socket.emit('updateUser', "x", 3)
         }
-      }, 10)
+      }, 2
     </script>
   </body>
 </html>
