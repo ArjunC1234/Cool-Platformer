@@ -52,9 +52,6 @@ io.on('connection', (socket) => {
     console.log(game.users)
     user.displayName =  "Tim Markle"
     io.emit("user joined", socket.id, game.users, user.data.color)
-  })
-  socket.on('updateUser', (dataKey, value) => {
-    game.getUser("id", socket.id).data[dataKey] = value
     socket.emit("updateGame", game.users)
   })
   socket.on('disconnect', function(){
@@ -63,6 +60,7 @@ io.on('connection', (socket) => {
   });
   socket.on('updateUser', (dataKey, value) => {
     game.getUser("id", socket.id).data[dataKey] += value
+    io.emit("updateGame", game.users)
   })
 });
 

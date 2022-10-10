@@ -22,17 +22,14 @@
       var client_users = []
       socket.on("connect", function () {
         socket.emit("user joined")
-        console.log("onconnect")
       })
       socket.on("disconnect", () => {
         socket.emit("user left"); // undefined
       });
       socket.on("user joined", function (id, users, color) {
         client_users = users
-        console.log("joined")
         if (id == socket.id) {
           for (var i = 0; i < client_users.length; i++) {
-            console.log("count")
             Corcle(client_users[i].id, client_users[i].data.color)
           }
         } else {
@@ -42,7 +39,6 @@
       socket.on("user left", function (id, users) {
         client_users = users
         document.getElementById(id).remove()
-        console.log("left")
       })
       socket.on("updateGame", function (users) {
         if (users.length > 0) {
