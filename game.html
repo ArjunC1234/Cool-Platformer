@@ -22,12 +22,19 @@
         socket.emit("user left"); // undefined
       });
       socket.on("user joined", function (id) {
-        client_users = users
+        console.log("user joined")
         if (id != socket.id) {
           client_users.push({id: id, x : 0, y : 0, legr : 0, right : true})
+          socket.emit("send players", player.x, player.y, legrotation, right, id)
+        }
+      })
+      socket.on("send players", function (client_id, x, y, legr, r, id) {
+        if (id == socket.id) {
+          client_users.push({id: client_id, x : x, y : y, legr : legr, right : r})
         }
       })
       socket.on("user left", function (id) {
+        console.log("user left")
         for (var i = 0; i < client_users.length; i++) {
           if (client_users[i].id == id) {
             client_users.splice(i, 1)
@@ -720,7 +727,7 @@
           }
           for (var i = 0; i < client_users.length; i++) {
             let client = client_users[i]
-            console.log("helloooo")
+            ctx.globalAlpha = 0.5
             if (client.r == false) {
               let leg = {
                 left: [client.x + 8, client.y + 40],
@@ -730,6 +737,7 @@
                 left: [client.x + 2, client.y + 33],
                 right: [client.x + client.width - 6, client.y + 33],
               };
+              
               ctx.fillStyle = "#b4f3ff";
               ctx.save();
               ctx.translate(arm.left[0] + 4, arm.left[1] + 3);
@@ -752,7 +760,6 @@
               ctx.fillRect(leg.right[0], leg.right[1], 5, 8);
               ctx.restore();
               ctx.fillStyle = "#b4f3ff";
-              ctx.globalAlpha = 0.5
               mirrorImage(player.img, player.x, player.y, true, false);
               ctx.save();
               ctx.translate(arm.right[0] + 2, arm.right[1] + 3);
@@ -799,6 +806,7 @@
                 player.width,
                 player.height
               );
+              ctx.globalAlpha = 1
               ctx.save();
               ctx.translate(arm.left[0] + 5, arm.left[1] + 3);
               ctx.rotate(client.legr * (Math.PI / 180));
@@ -806,6 +814,7 @@
               ctx.fillRect(arm.left[0], arm.left[1], 4, 12);
               ctx.restore();
             }
+            ctx.globalAlpha = 1
           }
           if (right == false) {
             legs = {
