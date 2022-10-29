@@ -16,8 +16,8 @@ io.on('connection', (socket) => {
   socket.on('disconnect', function(){
     socket.emit('user left')
   });
-  socket.on('position', (x, y) => {
-    io.emit("update", socket.id, x, y)
+  socket.on('position', (x, y, legrotation, right) => {
+    io.emit("update", socket.id, x, y, legrotation, right)
   })
 });
 
