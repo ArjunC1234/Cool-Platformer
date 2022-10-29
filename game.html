@@ -6,7 +6,11 @@
   </head>
   <body>
     <!--TYPE HTML HERE-->
-    
+    <canvas
+      id="gameCanv"
+      style="border: 3px solid black; background-color: lightblue"
+      class="overlay"
+    ></canvas>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io()
@@ -17,10 +21,25 @@
       socket.on("disconnect", () => {
         socket.emit("user left"); // undefined
       });
-      socket.on("user joined", function (id, users) {
+      socket.on("user joined", function (id) {
         client_users = users
         if (id != socket.id) {
-          
+          client_users.push({id: id, x : 0, y : 0})
+        }
+      })
+      socket.on("user left", function (id) {
+        for (var i = 0; i < client_users.length; i++) {
+          if (client_users[i].id == id) {
+            client_users.splice(i, 1)
+          }
+        }
+      })
+      socket.on("update", function (id, x, y) {
+        for (var i = 0; i < client_users.length; i++) {
+          if (client_users[i].id == id) {
+            client_users[i].x = x
+            client_users[i].y = y
+          }
         }
       })
       var disp = document.getElementById("gameCanv");
@@ -863,9 +882,7 @@
           if (camy > canvas.height - camheight) {
             camy = canvas.height - camheight;
           }
-          if (movingX || movingY) {
-            socket.emit("position", player.x, player.y)
-          }
+          socket.emit("position", player.x, player.y)
           dtx.clearRect(0, 0, disp.width, disp.height);
           dtx.drawImage(
             canvas,
