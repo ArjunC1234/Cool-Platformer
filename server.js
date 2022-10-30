@@ -15,7 +15,7 @@ app.get("/game/as-easy-as-it-gets", (req, res) => {
   res.sendFile(__dirname + "/levels/as-easy-as-it-gets");
 });
 app.get("/game/1", (req, res) => {
-  res.sendFile(__dirname + "/levels/as-easy-as-it-gets");
+  res.sendFile(__dirname + "/levels/as-easy-as-it-gets.html");
 });
 
 

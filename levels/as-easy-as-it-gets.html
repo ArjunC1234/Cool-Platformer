@@ -21,31 +21,35 @@
       socket.on("disconnect", () => {
         socket.emit("user left", window.location.pathname); // undefined
       });
-      socket.on("user joined", function (id, pathname) {
-        if (id != socket.id) {
+      socket.on("user joined", function (id, path) {
+        if (id != socket.id && path == window.location.pathname) {
           client_users.push({id: id, x : 0, y : 0, legr : 0, right : true})
           socket.emit("send players", player.x, player.y, legrotation, right, id, window.location.pathname)
         }
       })
-      socket.on("send players", function (client_id, x, y, legr, r, id) {
-        if (id == socket.id) {
+      socket.on("send players", function (client_id, x, y, legr, r, id, path) {
+        if (id == socket.id && path == window.location.pathname) {
           client_users.push({id: client_id, x : x, y : y, legr : legr, right : r})
         }
       })
-      socket.on("user left", function (id) {
-        for (var i = 0; i < client_users.length; i++) {
-          if (client_users[i].id == id) {
-            client_users.splice(i, 1)
+      socket.on("user left", function (id, path) {
+        if (path == window.location.pathname){
+          for (var i = 0; i < client_users.length; i++) {
+            if (client_users[i].id == id) {
+              client_users.splice(i, 1)
+            }
           }
         }
       })
-      socket.on("update", function (id, x, y, legr, r) {
-        for (var i = 0; i < client_users.length; i++) {
-          if (client_users[i].id == id) {
-            client_users[i].x = x
-            client_users[i].y = y
-            client_users[i].legr = legr
-            client_users[i].right = r
+      socket.on("update", function (id, x, y, legr, r, path) {
+        if (path == window.location.pathname) {
+          for (var i = 0; i < client_users.length; i++) {
+            if (client_users[i].id == id) {
+              client_users[i].x = x
+              client_users[i].y = y
+              client_users[i].legr = legr
+              client_users[i].right = r
+            }
           }
         }
       })
@@ -973,7 +977,7 @@
           if (camy > canvas.height - camheight) {
             camy = canvas.height - camheight;
           }
-          socket.emit("position", player.x, player.y, legrotation, right)
+          socket.emit("position", player.x, player.y, legrotation, right, window.location.pathname)
           dtx.clearRect(0, 0, disp.width, disp.height);
           dtx.drawImage(
             canvas,
