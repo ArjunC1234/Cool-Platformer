@@ -34,6 +34,11 @@ app.get("/levels/openworld", (req, res) => {
   checkIP(req, res, "/levels/openworld.html")
 });
 
+app.get("/levels/tutorial", (req, res) => {
+  checkIP(req, res, "/levels/tutorial.html")
+});
+
+
 
 
 io.on('connection', (socket) => {
