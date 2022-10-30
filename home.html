@@ -3,9 +3,7 @@
   <head>
     <title>Tim Markle</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="http://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
     <style>
-      @import url('http://fonts.cdnfonts.com/css/common-pixel');
       .zi0 {
         z-index : 0;
       }
@@ -29,7 +27,6 @@
         margin : 0px;
         right : 100px;
         text-align : left;
-        font-size : 9vh;
         font-family : Impact;
         width : 50%;
         text-wrap : wrap;
@@ -56,18 +53,24 @@
       .container {
         position : absolute;
         top : 0;
-        left : 0;
+        left : -50vw;
         width : 50vw;
         height : 100vh;
-        animation-name : titleani;
-        animation-duration : 2s;
+        animation-name: titleani;
         animation-delay : 500ms;
-        animation-direction : forwards;
+        animation-duration: 2s;
+        animation-iteration-count: 1;
+        -webkit-animation-fill-mode: forwards; /* Chrome 16+, Safari 4+ */
+        -moz-animation-fill-mode: forwards;    /* FF 5+ */
+        -o-animation-fill-mode: forwards;      /* Not implemented yet */
+        -ms-animation-fill-mode: forwards;     /* IE 10+ */
+        animation-fill-mode: forwards;         /* When the spec is finished */
       }
       @keyframes titleani{
-        0% : {left : -100vw;}
-        40% : {left : 10vw;}
-        100% : {}
+        0% {left : -50vw; font-size : 1vw}
+        40% {left : 10vw; font-size : 9vw}
+        60% {left : 0vw; font-size : 9vw}
+        100% {left : 0vw; font-size : 9vw}
       }
       html {
         height : 100%;
