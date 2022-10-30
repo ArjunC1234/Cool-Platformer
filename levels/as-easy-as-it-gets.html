@@ -16,16 +16,15 @@
       var socket = io()
       var client_users = []
       socket.on("connect", function () {
-        socket.emit("user joined")
+        socket.emit("user joined", window.location.pathname)
       })
       socket.on("disconnect", () => {
-        socket.emit("user left"); // undefined
+        socket.emit("user left", window.location.pathname); // undefined
       });
-      socket.on("user joined", function (id) {
-        console.log("user joined")
+      socket.on("user joined", function (id, pathname) {
         if (id != socket.id) {
           client_users.push({id: id, x : 0, y : 0, legr : 0, right : true})
-          socket.emit("send players", player.x, player.y, legrotation, right, id)
+          socket.emit("send players", player.x, player.y, legrotation, right, id, window.location.pathname)
         }
       })
       socket.on("send players", function (client_id, x, y, legr, r, id) {
@@ -34,7 +33,6 @@
         }
       })
       socket.on("user left", function (id) {
-        console.log("user left")
         for (var i = 0; i < client_users.length; i++) {
           if (client_users[i].id == id) {
             client_users.splice(i, 1)
