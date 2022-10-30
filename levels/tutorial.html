@@ -116,15 +116,50 @@
         [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1], //9
         [1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 1, 1, 1], //10
         [1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 1, 1, 1], //11
-        [1, 6, 0, 0, 0, 0, 1, 0, 0, 0, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1], //12
+        [1, 6, 0, 0, 0, 0, 1, 5, 0, 0, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1], //12
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1]  //13
       ];
       addSign(4, 12, 'Welcome to the tutorial. To get past this first jump, short tap "W" or "⬆".')
       addSign(7, 10, 'Good Job! Now do the same thing except this time, hold the button down. This makes you jump higher.')
+      addSign(6, 1, "Nice work getting up here! The green arrow ahead allows you to jump for a 2nd time when you are over it.")
+      addSign(9, 3, "BEWARE: The salmon red blocks kill you!!!! They WILL reset you.")
+      addSign(16, 11, "Great! These next tiles are called slipstreams. They multiply your speed by 2. Get to the other side.")
+      addSign(9, 12, "YOU DID IT!!! The checkered tile ahead is the finish line. Go walk into it and your done!")
       function addSign(x, y, text) {
         if (x >= 0 && x < tm[0].length && y >= 0 && y < tm.length) {
           if (tm[y][x] == 0) {
             tm[y][x] = {type : 7, text : text}
+          }
+        }
+      }
+      function checkSign(){
+        for (var y = 0; y < tm.length; y++) {
+          for (var x = 0; x < tm[y].length; x++) {
+            if (
+              typeof tm[y][x] === "object" &&
+              y * 48 >= player.y - 96 + player.height/2 &&
+              y * 48 <= player.y + 96 + player.height/2 &&
+              (x * 48 >= player.x - 96 + player.width/2 || x * 48 <= player.x + player.width/2 + 96)
+            ) {
+              if (tm[y][x].type == 7) {
+                let tile = {
+                  x: x * 48,
+                  y: y * 48,
+                  type: 7,
+                };
+                signhover.active = false
+                if (!(player.x + player.width/2 > tile.x + 48) && !(player.x + player.width/2 < tile.x)) {
+                  if (
+                    !(player.y + player.height/2 > tile.y + 48) &&
+                    !(player.y + player.height/2 < tile.y)
+                  ) {
+                    signhover.active = true
+                    signhover.text = tm[y][x].text
+                    return
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1008,9 +1043,7 @@
             (dw = disp.width),
             (dy = disp.height)
           );
-          for (var y = 0; y < tm.length; y++) {
-            
-          }
+          checkSign()
           if (signhover.active) {
             dtx.font = "bold 20px Monospace"
             let text = dtx.measureText(signhover.text)
