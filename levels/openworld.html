@@ -19,7 +19,7 @@
         socket.emit("user joined", window.location.pathname)
       })
       socket.on("disconnect", () => {
-        socket.emit("user left", window.location.pathname); // undefined
+        socket.emit("user left", window.location.pathname);
       });
       socket.on("user joined", function (id, path) {
         if (id != socket.id && path == window.location.pathname) {

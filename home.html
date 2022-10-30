@@ -123,9 +123,9 @@
         font-size : 24px;
         font-family : Impact;
         border-radius : 25px;
-        width : 80%;
-        left : 10%;
-        right : 10%;
+        width : 70%;
+        left : 15%;
+        right : 15%;
         margin-top : 5px;
         margin-bottom : 5px;
         animation-name: buttonaniout;
@@ -147,13 +147,27 @@
         -ms-animation-fill-mode: forwards;     /* IE 10+ */
         animation-fill-mode: forwards;         /* When the spec is finished */
       }
+      button:active {
+        animation-name : buttonaniclickin;
+        animation-duration: 500ms;
+        animation-iteration-count: 1;
+        -webkit-animation-fill-mode: forwards; /* Chrome 16+, Safari 4+ */
+        -moz-animation-fill-mode: forwards;    /* FF 5+ */
+        -o-animation-fill-mode: forwards;      /* Not implemented yet */
+        -ms-animation-fill-mode: forwards;     /* IE 10+ */
+        animation-fill-mode: forwards;         /* When the spec is finished */
+      }
       
+      @keyframes buttonaniclickin {
+        0% {width : 80%; right : 10%; left : 10%;background-color : rgba(255, 255, 255, 1);}
+        100% {width : 70%; right : 15%; left : 15%; background-color : rgba(255, 255, 255, 0.3);}
+      }
       @keyframes buttonaniin {
-        100% {height : 20%; background-color : rgba(255, 255, 255, 1);}
+        100% {width : 80%; right : 10%; left : 10%;background-color : rgba(255, 255, 255, 1);}
       }
       @keyframes buttonaniout {
-        0% {height : 20%; background-color : rgba(255, 255, 255, 1);}
-        100% {height : 10%; background-color : rgba(255, 255, 255, 0.3);}
+        0% {width : 80%; right : 10%; left : 10%;background-color : rgba(255, 255, 255, 1);}
+        100% {width : 70%; right : 15%; left : 15%; background-color : rgba(255, 255, 255, 0.3);}
       }
     </style>
   </head>
@@ -165,25 +179,6 @@
     </div>
     <div class="container2 z1">
       <div class="levels z1">
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
-        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
         <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
       </div>
     </div>
