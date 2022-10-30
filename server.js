@@ -8,9 +8,18 @@ app.set("trust proxy", true);
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/game.html");
 });
+
+
+
 app.get("/game/as-easy-as-it-gets", (req, res) => {
   res.sendFile(__dirname + "/levels/as-easy-as-it-gets");
 });
+app.get("/game/1", (req, res) => {
+  res.sendFile(__dirname + "/levels/as-easy-as-it-gets");
+});
+
+
+
 
 io.on('connection', (socket) => {
   socket.on("user joined", () => {
