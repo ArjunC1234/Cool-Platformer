@@ -7,23 +7,30 @@ app.set("trust proxy", true);
 
 var down = true
 var allowedips = process.env.ALLOWED
-function checkip (req, res, path) {
-  for (var i = 0; i < allowedips.length; i++) {
-    if (!down || req.ip == )
+
+function checkIP (req, res, path) {
+  if (down) {
+    for (var i = 0; i < allowedips.length; i++) {
+      if (req.ip == allowedips[i]) {
+        res.sendFile(__dirname + path)
+        return
+      }
+    }
+    //res.sendFile(__dirname + "/maintainence.html")
+  } else {
+    res.sendFile(__dirname + path)
   }
 }
+
+
 app.get("/", (req, res) => {
-  if (!down || req.ip == "50.47.214.254") {
-    res.sendFile(__dirname + "/home.html");
-  } else {
-    res.sendFile(__dirname + "/maintainence.html");
-  }
+  checkIP(req, res, "./home.html")
 });
 
 
 
 app.get("/levels/openworld", (req, res) => {
-  res.sendFile(__dirname + "/levels/openworld.html");;
+  checkIP(req, res, "./levels/openworld.html")
 });
 
 
