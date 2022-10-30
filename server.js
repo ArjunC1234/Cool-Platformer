@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;;
 app.set("trust proxy", true);
 
 var down = true
-var allowedips = process.env.ALLOWED
+var allowedips = [process.env.ALLOWED1]
 
 function checkIP (req, res, path) {
   if (down) {
@@ -16,7 +16,7 @@ function checkIP (req, res, path) {
         return
       }
     }
-    //res.sendFile(__dirname + "/maintainence.html")
+    res.sendFile(__dirname + "/maintainence.html")
   } else {
     res.sendFile(__dirname + path)
   }
@@ -24,13 +24,13 @@ function checkIP (req, res, path) {
 
 
 app.get("/", (req, res) => {
-  checkIP(req, res, "./home.html")
+  checkIP(req, res, "/home.html")
 });
 
 
 
 app.get("/levels/openworld", (req, res) => {
-  checkIP(req, res, "./levels/openworld.html")
+  checkIP(req, res, "/levels/openworld.html")
 });
 
 
@@ -42,6 +42,7 @@ io.on('connection', (socket) => {
   })
   socket.on('user left', function(){
     io.emit('user left', socket.id)
+    console.log("hellooooo")
   });
   socket.on("send players", function(x, y, legrotation, right, id, path) {
     io.emit("send players", socket.id, x, y, legrotation, right, id, path)

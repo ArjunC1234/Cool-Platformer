@@ -21,6 +21,9 @@
       socket.on("disconnect", () => {
         socket.emit("user left", window.location.pathname);
       });
+      window.addEventListener("beforeunload", function (e) {
+        socket.emit("user left", window.location.pathname)
+      });
       socket.on("user joined", function (id, path) {
         if (id != socket.id && path == window.location.pathname) {
           client_users.push({id: id, x : 0, y : 0, legr : 0, right : true})
