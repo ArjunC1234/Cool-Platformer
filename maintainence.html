@@ -12,12 +12,6 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io()
-      
-      function bypass(password) {
-        if (password == process.env.DEV) {
-          socket.emit("bypass", true)
-        }
-      }
     </script>
   </body>
 </html>

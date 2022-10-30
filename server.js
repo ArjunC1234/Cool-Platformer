@@ -19,11 +19,7 @@ app.get("/", (req, res) => {
 
 
 app.get("/levels/openworld", (req, res) => {
-  if (bypass || !down) {
-    res.sendFile(__dirname + "/levels/openworld.html");;
-  } else {
-    res.sendFile(__dirname + "/maintainence.html");
-  }
+  res.sendFile(__dirname + "/levels/openworld.html");;
 });
 
 
