@@ -6,6 +6,12 @@
     <link href="http://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
     <style>
       @import url('http://fonts.cdnfonts.com/css/common-pixel');
+      .zi0 {
+        z-index : 0;
+      }
+      .zi1 {
+        z-index : 1;
+      }
       .topbar {
         position : relative;
         left : 0px;
@@ -13,7 +19,6 @@
         height : 10vh;
         width : 100vw;
         text-align : center;
-        background-image: linear-gradient(to right, #FFFFFF , #DDCBDA, #FFFFFF);
       }
       .logo {
         height : 7vh;
@@ -26,33 +31,41 @@
         font-size : 9vh;
         font-family : Impact;
       }
-      .underline {
-        width: 100vw;
-        text-align:center;
-        font-size:30px;
-      }
-
-      .underline:after {
-        content: '\00a0';
-        background-image:
-          radial-gradient(at 50% 0, #DDCBDA 0%, #FFFFFF 25%, transparent 50%);
-        background-size: 100% 100px;
-        background-repeat: no-repeat;
-        float:left;
-        width:100%;
-      }
       .gradientbg {
         background-image:
-          radial-gradient(at 50% 0, #DDCBDA 0%, #FFFFFF 25%, transparent 50%);
+          radial-gradient(#DDCBDA 20%, cyan 25%, transparent 50%);
+        position : absolute;
+        top : 5vh;
+        height : 190vh;
+        width : 100vw;
+        left: 0; 
+        right: 0; 
+        margin-left: auto; 
+        margin-right: auto; 
+      }
+      .gradientbg2 {
+        background-image:
+          radial-gradient(#DDCBDA 20%, cyan 25%, transparent 50%);
+        position : absolute;
+        bottom : 5vh;
+        height : 190vh;
+        width : 100vw;
+        left: 0; 
+        right: 0; 
+        margin-left: auto; 
+        margin-right: auto; 
       }
     </style>
   </head>
   <body style="padding: 0; margin: 0; width: 100%; height: 100%; overflow: hidden;">
     <!--TYPE HTML HERE-->
-    <div class = "gradientbg">
+    <div class = "gradientbg zi0">
       
     </div>
-    <div class="topbar underline">
+    <div class = "gradientbg2 zi0">
+      
+    </div>
+    <div class="topbar zi1">
       <h1 class="title"><img class="logo" src="https://cdn.glitch.global/1284e632-8cd2-44e5-8caa-58d0949e38ba/logo?v=1667116626851"> CSP Extra Credit LOL</h1>
     </div>
     <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
