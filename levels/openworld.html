@@ -21,9 +21,6 @@
       socket.on("disconnect", () => {
         socket.emit("user left", window.location.pathname);
       });
-      window.addEventListener("beforeunload", function (e) {
-        socket.emit("user left", window.location.pathname)
-      });
       socket.on("user joined", function (id, path) {
         if (id != socket.id && path == window.location.pathname) {
           client_users.push({id: id, x : 0, y : 0, legr : 0, right : true})
@@ -36,13 +33,10 @@
         }
       })
       socket.on("user left", function (id, path) {
-        console.log("user left received")
         if (path == window.location.pathname){
-          console.log("user left path")
           for (var i = 0; i < client_users.length; i++) {
             if (client_users[i].id == id) {
               client_users.splice(i, 1)
-              console.log("user left spliced")
             }
           }
         }
