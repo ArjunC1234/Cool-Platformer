@@ -4,20 +4,37 @@ const io = require("socket.io")(http);
 const port = process.env.PORT || 3000;;
 
 app.set("trust proxy", true);
-  
+
+var bypass = false
+var down = false
+
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  if (bypass || !down) {
+    res.sendFile(__dirname + "/home.html");
+  } else {
+    res.sendFile(__dirname + "/maintainence.html");
+  }
 });
 
 
 
 app.get("/levels/openworld", (req, res) => {
-  res.sendFile(__dirname + "/levels/openworld.html");
+  if (bypass || !down) {
+    res.sendFile(__dirname + "/levels/openworld.html");;
+  } else {
+    res.sendFile(__dirname + "/maintainence.html");
+  }
 });
 
 
 
 io.on('connection', (socket) => {
+  socket.on("bypass", function (bool) {
+    bypass = bool
+  })
+  
+  
+  
   socket.on("user joined", (path) => {
     io.emit("user joined", socket.id, path)
   })

@@ -710,15 +710,15 @@
           if (player.x < 0) {
             player.x = 0;
           }
-          if (player.x > canvas.width - 48) {
-            player.x = canvas.width - 48;
+          if (player.x > canvas.width - player.width) {
+            player.x = canvas.width - player.width;
           }
           if (player.y < 0) {
             player.y = 0;
             jumping = false;
           }
-          if (player.y > canvas.height - 48) {
-            player.y = canvas.height - 48;
+          if (player.y > canvas.height - player.height) {
+            player.y = canvas.height - player.height;
             onGround = true;
           }
           for (var i = 0; i < client_users.length; i++) {
