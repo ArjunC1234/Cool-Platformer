@@ -40,7 +40,7 @@ io.on('connection', (socket) => {
   socket.on("user joined", (path) => {
     io.emit("user joined", socket.id, path)
   })
-  socket.on('user left', function(path){
+  socket.on('user left', (path) => {
     io.emit('user left', socket.id, path)
   });
   socket.on("send players", function(x, y, legrotation, right, id, path) {
