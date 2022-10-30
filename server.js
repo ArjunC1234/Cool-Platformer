@@ -40,8 +40,9 @@ io.on('connection', (socket) => {
   socket.on("user joined", (path) => {
     io.emit("user joined", socket.id, path)
   })
-  socket.on('user left', (path) => {
-    io.emit('user left', socket.id, path)
+  socket.on('disconnect', () => {
+    console.log(socket.request.url)
+    io.emit('user left', socket.id, socket.request.url)
   });
   socket.on("send players", function(x, y, legrotation, right, id, path) {
     io.emit("send players", socket.id, x, y, legrotation, right, id, path)
