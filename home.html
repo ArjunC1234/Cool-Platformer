@@ -67,10 +67,28 @@
         animation-fill-mode: forwards;         /* When the spec is finished */
       }
       @keyframes titleani{
-        0% {left : -50vw; font-size : 1vw}
-        40% {left : 10vw; font-size : 9vw}
-        60% {left : 0vw; font-size : 9vw}
-        100% {left : 0vw; font-size : 9vw}
+        0% {left : -50vw; font-size : 1vh}
+        40% {left : 10vw; font-size : 5vh}
+        60% {left : 0vw; font-size : 5vh}
+        100% {left : 0vw; font-size : 5vh}
+      }
+      .levels {
+        height : 60vh;
+        background-image : radial-gradient(rgba(255, 255, 255, 0.8) 0%, transparent 100%);
+        width : 70%;
+        border-radius : 100px;
+        animation-name: titleani;
+        animation-delay : 500ms;
+        animation-duration: 2s;
+        animation-iteration-count: 1;
+        -webkit-animation-fill-mode: forwards; /* Chrome 16+, Safari 4+ */
+        -moz-animation-fill-mode: forwards;    /* FF 5+ */
+        -o-animation-fill-mode: forwards;      /* Not implemented yet */
+        -ms-animation-fill-mode: forwards;     /* IE 10+ */
+        animation-fill-mode: forwards;         /* When the spec is finished */
+      }
+      @keyframes {
+        
       }
       html {
         height : 100%;
@@ -81,14 +99,13 @@
     <!--TYPE HTML HERE-->
     <div class = "gradientbg zi0"></div>
     <div class="container z1">
-      <h1 class="title">Basic Platformer</h1>
+      <h1 class="title">Basic<br>Platformer</h1>
     </div>
     <div class="container2 z1">
       <div class="levels z1">
-        Hello
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
       </div>
     </div>
-    <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io()
