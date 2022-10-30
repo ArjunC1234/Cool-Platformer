@@ -6,18 +6,14 @@ const port = process.env.PORT || 3000;;
 app.set("trust proxy", true);
   
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/game.html");
+  res.sendFile(__dirname + "/index.html");
 });
 
 
 
-app.get("/game/as-easy-as-it-gets", (req, res) => {
-  res.sendFile(__dirname + "/levels/as-easy-as-it-gets");
+app.get("/levels/openworld", (req, res) => {
+  res.sendFile(__dirname + "/levels/openworld.html");
 });
-app.get("/game/1", (req, res) => {
-  res.sendFile(__dirname + "/levels/as-easy-as-it-gets.html");
-});
-
 
 
 
