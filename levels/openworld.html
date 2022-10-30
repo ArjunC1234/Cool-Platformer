@@ -13,14 +13,12 @@
     ></canvas>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      var socket = io({path:window.location.pathname})
+      var socket = io()
+      socket.data= {URLpath : window.location.pathname}
       var client_users = []
       socket.on("connect", function () {
         socket.emit("user joined", window.location.pathname)
       })
-      socket.on("disconnect", function() {
-        socket.emit("user left", window.location.pathname)
-      });
       socket.on("user joined", function (id, path) {
         if (id != socket.id && path == window.location.pathname) {
           client_users.push({id: id, x : 0, y : 0, legr : 0, right : true})
