@@ -6,15 +6,10 @@
   </head>
   <body style="padding: 0; margin: 0; width: 100%; height: 100%; overflow: hidden">
     <!--TYPE HTML HERE-->
-    <canvas
-      id="gameCanv"
-      style="border: 3px solid black; background-color: lightblue"
-      class="overlay"
-    ></canvas>
+    <canvas id="gameCanv"></canvas>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io()
-      socket.data= {URLpath : window.location.pathname}
       var client_users = []
       socket.on("connect", function () {
         socket.emit("user joined", window.location.pathname)

@@ -5,12 +5,10 @@ const port = process.env.PORT || 3000;;
 
 app.set("trust proxy", true);
 
-var down = true
+var down = false
 var allowedips = [process.env.ALLOWED1]
 
-var levelSockets = {
-  openworld : []
-}
+var levelSockets = []
 function checkIP (req, res, path) {
   if (down) {
     for (var i = 0; i < allowedips.length; i++) {
@@ -41,13 +39,15 @@ app.get("/levels/openworld", (req, res) => {
 io.on('connection', (socket) => {
   socket.on("user joined", (path) => {
     io.emit("user joined", socket.id, path)
-    levelSockets.openworld.push({})
+    levelSockets.push({id : socket.id, path : path})
   })
-  socket.on('user left', (path) => {
-    io.emit('user left', socket.id, path)
-  });
   socket.on('disconnect', function() {
-    io.emit("user left", socket.id)
+    for (var i = 0; i < levelSockets.length; i++) {
+      if (levelSockets[i].id == socket.id) {
+        io.emit("user left", socket.id, levelSockets[i].path)
+        levelSockets.splice(i, 1)
+      }
+    } 
   });
   socket.on("send players", function(x, y, legrotation, right, id, path) {
     io.emit("send players", socket.id, x, y, legrotation, right, id, path)
