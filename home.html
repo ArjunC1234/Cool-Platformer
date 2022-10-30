@@ -27,46 +27,34 @@
         padding : 0px;
         margin : 0px;
         margin-left : 10px;
-        text-align : center;
+        text-align : left;
         font-size : 9vh;
         font-family : Impact;
+        width : 50%;
+        text-wrap : wrap;
       }
       .gradientbg {
-        background-image:
-          radial-gradient(#DDCBDA 0%, darkslategray 40%);
         position : absolute;
-        top : 5vh;
-        height : 190vh;
+        top : 0px;
+        height : 100vh;
         width : 100vw;
         left: 0; 
-        right: 0; 
-        margin-left: auto; 
-        margin-right: auto; 
+        background-image : linear-gradient(to right, rgba(255, 255, 255, 0.8), transparent)
       }
-      .gradientbg2 {
-        background-image:
-          radial-gradient(#DDCBDA 0%, darkslategray 50%);
+      .container {
         position : absolute;
-        bottom : 5vh;
-        height : 190vh;
-        width : 100vw;
-        left: 0; 
-        right: 0; 
-        margin-left: auto; 
-        margin-right: auto; 
+        top : 0;
+        left : 0;
+        width : 40vw;
+        height : 100vh;
       }
     </style>
   </head>
-  <body style="padding: 0; margin: 0; width: 100%; height: 100%; overflow: hidden; background-color : darkslategray">
+  <body style="padding: 0; margin: 0; width: 100%; height: 100%; overflow: hidden; background-image: url('https://cdn.glitch.global/1284e632-8cd2-44e5-8caa-58d0949e38ba/New%20Piskel-4.png%20(4).png?v=1667148825701');background-repeat : no-repeat;background-size : cover;">
     <!--TYPE HTML HERE-->
-    <div class = "gradientbg zi0">
-      
-    </div>
-    <div class = "gradientbg2 zi0">
-      
-    </div>
-    <div class="topbar zi1">
-      <h1 class="title"><img class="logo" src="https://cdn.glitch.global/1284e632-8cd2-44e5-8caa-58d0949e38ba/logo?v=1667116626851"> CSP Extra Credit LOL</h1>
+    <div class = "gradientbg zi0"></div>
+    <div class="container z1">
+      <h1 class="title">Basic Platformer</h1>
     </div>
     <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
     <script src="/socket.io/socket.io.js"></script>
