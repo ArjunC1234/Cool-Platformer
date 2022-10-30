@@ -1031,8 +1031,15 @@
             (dy = disp.height)
           );
           if (signhover.active) {
-            dtx.fillStyle = rgba(0, 0, 0, 0.7)
-            dtx.roundRect(disp.width - 210)
+            let signtext = document.createElement("p")
+            signtext.style = "font-family : monospace; font-size : 20px; height : auto; width : auto; position : absolute; whiteSpace : no-wrap;"
+            signtext.innerHTML = signhover.text
+            let width = Math.ceil(signtext.clientWidth)
+            dtx.fillStyle = "rgba(0, 0, 0, 0.7)"
+            dtx.roundRect(disp.width/2 - width/2 + 20, disp.height - 50, width + 20, 30)
+            dtx.font = "bold 20px Monospace"
+            dtx.fillStyle = "white"
+            dtx.fillText(signhover.text, disp.width/2, disp.height - 40)
           }
           if (key) {
             dtx.fillStyle = "rgba(100, 100, 100, 0.8)";
