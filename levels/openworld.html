@@ -13,7 +13,7 @@
     ></canvas>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      var socket = io()
+      var socket = io({path:window.location.pathname})
       var client_users = []
       socket.on("connect", function () {
         socket.emit("user joined", window.location.pathname)

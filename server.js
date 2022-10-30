@@ -36,15 +36,14 @@ app.get("/levels/openworld", (req, res) => {
 
 
 io.on('connection', (socket) => {
-  
   socket.on("user joined", (path) => {
     io.emit("user joined", socket.id, path)
   })
   socket.on('user left', (path) => {
-    io.emit('user left', socket.id, path)
+    io.emit('user left', socket.id, )
   });
   socket.on('disconnect', function(){
-    io.emit("user left", socket.id, game.users)
+    io.emit("user left", socket.id, )
   });
   socket.on("send players", function(x, y, legrotation, right, id, path) {
     io.emit("send players", socket.id, x, y, legrotation, right, id, path)
