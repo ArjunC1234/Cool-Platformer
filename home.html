@@ -76,10 +76,12 @@
         height : 60vh;
         background-image : radial-gradient(rgba(255, 255, 255, 0.8) 0%, transparent 100%);
         width : 70%;
+        position : absolute;
+        top : -60vh;
         border-radius : 100px;
-        animation-name: titleani;
-        animation-delay : 500ms;
-        animation-duration: 2s;
+        animation-name: levelsani;
+        animation-delay : 1250ms;
+        animation-duration: 500ms;
         animation-iteration-count: 1;
         -webkit-animation-fill-mode: forwards; /* Chrome 16+, Safari 4+ */
         -moz-animation-fill-mode: forwards;    /* FF 5+ */
@@ -87,11 +89,40 @@
         -ms-animation-fill-mode: forwards;     /* IE 10+ */
         animation-fill-mode: forwards;         /* When the spec is finished */
       }
-      @keyframes {
-        
+      @keyframes levelsani{
+        0% {top : -60vh;}
+        100% {top: 50%; -ms-transform: translateY(-50%); transform: translateY(-50%);}
       }
       html {
         height : 100%;
+      }
+      button {
+        border : none;
+        background-color : rgba(255, 255, 255, 0.7);
+        height : 10%;
+        font-size : 24px;
+        font-family : Impact;
+        border-radius : 25px;
+        width : 80%;
+        margin-left : 10%;
+        margin-right : 10%;
+        margin-top : 5px;
+        margin-bottom : 5px;
+      }
+      button:hover {
+        animation-name: buttonani;
+        animation-delay : 1250ms;
+        animation-duration: 500ms;
+        animation-iteration-count: 1;
+        -webkit-animation-fill-mode: forwards; /* Chrome 16+, Safari 4+ */
+        -moz-animation-fill-mode: forwards;    /* FF 5+ */
+        -o-animation-fill-mode: forwards;      /* Not implemented yet */
+        -ms-animation-fill-mode: forwards;     /* IE 10+ */
+        animation-fill-mode: forwards;         /* When the spec is finished */
+      }
+      @keyframes buttonani {
+        0% {height : 10%;}
+        100% {height : 20%}
       }
     </style>
   </head>
