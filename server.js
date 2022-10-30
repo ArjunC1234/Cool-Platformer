@@ -5,11 +5,15 @@ const port = process.env.PORT || 3000;;
 
 app.set("trust proxy", true);
 
-var bypass = false
-var down = false
-
+var down = true
+var allowedips = process.env.ALLOWED
+function checkip (req, res, path) {
+  for (var i = 0; i < allowedips.length; i++) {
+    if (!down || req.ip == )
+  }
+}
 app.get("/", (req, res) => {
-  if (bypass || !down) {
+  if (!down || req.ip == "50.47.214.254") {
     res.sendFile(__dirname + "/home.html");
   } else {
     res.sendFile(__dirname + "/maintainence.html");
@@ -25,16 +29,11 @@ app.get("/levels/openworld", (req, res) => {
 
 
 io.on('connection', (socket) => {
-  socket.on("bypass", function (bool) {
-    bypass = bool
-  })
-  
-  
   
   socket.on("user joined", (path) => {
     io.emit("user joined", socket.id, path)
   })
-  socket.on('disconnect', function(){
+  socket.on('user left', function(){
     io.emit('user left', socket.id)
   });
   socket.on("send players", function(x, y, legrotation, right, id, path) {

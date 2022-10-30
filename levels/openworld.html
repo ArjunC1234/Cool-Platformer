@@ -33,10 +33,13 @@
         }
       })
       socket.on("user left", function (id, path) {
+        console.log("user left received")
         if (path == window.location.pathname){
+          console.log("user left path")
           for (var i = 0; i < client_users.length; i++) {
             if (client_users[i].id == id) {
               client_users.splice(i, 1)
+              console.log("user left spliced")
             }
           }
         }
