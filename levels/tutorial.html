@@ -119,7 +119,8 @@
         [1, 6, 0, 0, 0, 0, 1, 0, 0, 0, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1], //12
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1]  //13
       ];
-      addSign(4, 12, 'Welcome to the tutorial. To get past this first jump, short tap "W" or "⬆"')
+      addSign(4, 12, 'Welcome to the tutorial. To get past this first jump, short tap "W" or "⬆".')
+      addSign(7, 10, 'Good Job! Now do the same thing except this time, hold the button down. This makes you jump higher.')
       function addSign(x, y, text) {
         if (x >= 0 && x < tm[0].length && y >= 0 && y < tm.length) {
           if (tm[y][x] == 0) {
@@ -290,30 +291,7 @@
                 }
               }
             }
-            if (
-              typeof tm[y][x] === "object" &&
-              y * 48 >= player.y - 96 + player.height/2 &&
-              y * 48 <= player.y + 96 + player.height/2 &&
-              (x * 48 >= player.x - 96 + player.width/2 || x * 48 <= player.x + player.width/2 + 96)
-            ) {
-              if (tm[y][x].type == 7) {
-                let tile = {
-                  x: x * 48,
-                  y: y * 48,
-                  type: 7,
-                };
-                signhover.active = false
-                if (!(player.x + player.width/2 > tile.x + 48) && !(player.x + player.width/2 < tile.x)) {
-                  if (
-                    !(player.y + player.height/2 > tile.y + 48) &&
-                    !(player.y + player.height/2 < tile.y)
-                  ) {
-                    signhover.active = true
-                    signhover.text = tm[y][x].text
-                  }
-                }
-              }
-            }
+
             if (
               tm[y][x] == 1 &&
               y * 48 >= player.y - 96 + player.height/2 &&
@@ -1030,16 +1008,17 @@
             (dw = disp.width),
             (dy = disp.height)
           );
+          for (var y = 0; y < tm.length; y++) {
+            
+          }
           if (signhover.active) {
-            let signtext = document.createElement("p")
-            signtext.style = "font-family : monospace; font-size : 20px; height : auto; width : auto; position : absolute; whiteSpace : no-wrap;"
-            signtext.innerHTML = signhover.text
-            let width = Math.ceil(signtext.clientWidth)
-            dtx.fillStyle = "rgba(0, 0, 0, 0.7)"
-            dtx.roundRect(disp.width/2 - width/2 + 20, disp.height - 50, width + 20, 30)
             dtx.font = "bold 20px Monospace"
+            let text = dtx.measureText(signhover.text)
+            let width = text.width
+            dtx.fillStyle = "rgba(0, 0, 0, 0.7)"
+            dtx.roundRect(disp.width/2 - width/2 - 10, disp.height - 50, width + 20, 30, 20).fill()
             dtx.fillStyle = "white"
-            dtx.fillText(signhover.text, disp.width/2, disp.height - 40)
+            dtx.fillText(signhover.text, disp.width/2 - width/2, disp.height - 30)
           }
           if (key) {
             dtx.fillStyle = "rgba(100, 100, 100, 0.8)";
