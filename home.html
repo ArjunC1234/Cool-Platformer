@@ -3,12 +3,35 @@
   <head>
     <title>Tim Markle</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .topbar {
+        position : absolute;
+        left : 0px;
+        top : 0px;
+        height : 10vh;
+        width : 100vw;
+        border-bottom : 10px solid black;
+      }
+      .logo {
+        position : absolute;
+        top : 5%;
+        bottom : 5%;
+        height : 90%;
+        left : 1%;
+      }
+      .title {
+        font-size : 2vw;
+        font-family : "Verdana";
+        position : relative;
+        padding-left : 20px;
+      }
+    </style>
   </head>
   <body style="padding: 0; margin: 0; width: 100%; height: 100%; overflow: hidden">
     <!--TYPE HTML HERE-->
-    <div>
-      <img src="https://cdn.glitch.global/1284e632-8cd2-44e5-8caa-58d0949e38ba/logo?v=1667116626851">
-      <h1>CSP-extra-credit<
+    <div class="topbar">
+      <img class="logo" src="https://cdn.glitch.global/1284e632-8cd2-44e5-8caa-58d0949e38ba/logo?v=1667116626851">
+      <h1 class="title">CSP Extra Credit LOL</h1>
     </div>
     <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
     <script src="/socket.io/socket.io.js"></script>
