@@ -72,10 +72,29 @@
         60% {left : 0vw; font-size : 5vh}
         100% {left : 0vw; font-size : 5vh}
       }
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #888;
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
       .levels {
         height : 60vh;
         background-image : radial-gradient(rgba(255, 255, 255, 0.8) 0%, transparent 100%);
         width : 70%;
+        overflow-y : scroll;
         position : absolute;
         top : -60vh;
         border-radius : 100px;
@@ -98,7 +117,7 @@
       }
       button {
         border : none;
-        background-color : rgba(255, 255, 255, 0.7);
+        background-color : rgba(255, 255, 255, 0.3);
         height : 10%;
         font-size : 24px;
         font-family : Impact;
@@ -108,11 +127,8 @@
         margin-right : 10%;
         margin-top : 5px;
         margin-bottom : 5px;
-      }
-      button:hover {
-        animation-name: buttonani;
-        animation-delay : 1250ms;
-        animation-duration: 500ms;
+        animation-name: buttonaniout;
+        animation-duration: 100ms;
         animation-iteration-count: 1;
         -webkit-animation-fill-mode: forwards; /* Chrome 16+, Safari 4+ */
         -moz-animation-fill-mode: forwards;    /* FF 5+ */
@@ -120,9 +136,24 @@
         -ms-animation-fill-mode: forwards;     /* IE 10+ */
         animation-fill-mode: forwards;         /* When the spec is finished */
       }
-      @keyframes buttonani {
-        0% {height : 10%;}
-        100% {height : 20%}
+      button:hover {
+        animation-name: buttonaniin;
+        animation-duration: 100ms;
+        animation-iteration-count: 1;
+        -webkit-animation-fill-mode: forwards; /* Chrome 16+, Safari 4+ */
+        -moz-animation-fill-mode: forwards;    /* FF 5+ */
+        -o-animation-fill-mode: forwards;      /* Not implemented yet */
+        -ms-animation-fill-mode: forwards;     /* IE 10+ */
+        animation-fill-mode: forwards;         /* When the spec is finished */
+      }
+      
+      @keyframes buttonaniin {
+        from {height : 10%; background-color : rgba(255, 255, 255, 0.3);}
+        to {height : 20%; background-color : rgba(255, 255, 255, 1);}
+      }
+      @keyframes buttonaniout {
+        from {height : 20%; background-color : rgba(255, 255, 255, 1);}
+        to {height : 10%; background-color : rgba(255, 255, 255, 0.3);}
       }
     </style>
   </head>
@@ -134,6 +165,25 @@
     </div>
     <div class="container2 z1">
       <div class="levels z1">
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
+        <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
         <button onclick="window.location.pathname = '/levels/openworld'">CLICK ME</button>
       </div>
     </div>
