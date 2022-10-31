@@ -1068,6 +1068,12 @@
             dtx.font = "bold 20px Monospace"
             let text = dtx.measureText(signhover.text)
             let width = text.width
+            let height = 30
+            let widthcap = 500
+            if (width > widthcap) {
+              width = widthcap
+              for (var i =0; (width-width%widthcap)/widthcap + 1)
+            }
             dtx.fillStyle = "rgba(0, 0, 0, 0.7)"
             dtx.roundRect(disp.width/2 - width/2 - 10, disp.height - 50, width + 20, 30, 20).fill()
             dtx.fillStyle = "white"
