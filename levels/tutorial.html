@@ -1086,16 +1086,18 @@
             dtx.font = "bold 20px Monospace"
             let text = dtx.measureText(signhover.text)
             let width = text.width
-            let lines = getLines(dtx, signhover.text, 500)
+            let maxwidth = 500
+            let lines = getLines(dtx, signhover.text, maxwidth)
             height = 30
             for (var i = 0; i < lines.length; i++) {
               height += 20
+              width = maxwidth
             }
             dtx.fillStyle = "rgba(0, 0, 0, 0.7)"
             dtx.roundRect(disp.width/2 - width/2 - 10, disp.height - 20 - height, width + 20, height, 20).fill()
             dtx.fillStyle = "white"
             for (var i = 0; i < lines.length; i++) {
-              dtx.fillText(lines[i], disp.width/2 - width/2, height - 25)
+              dtx.fillText(lines[i], disp.width/2 - dtx.measureText(lines[i]).width/2, disp.height - height + 10)
               height -= 20
             }
           }
