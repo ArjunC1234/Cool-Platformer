@@ -152,6 +152,24 @@
           }
         }
       }
+      function getLines(ctx, text, maxWidth) {
+        var words = text.split(" ");
+        var lines = [];
+        var currentLine = words[0];
+
+        for (var i = 1; i < words.length; i++) {
+          var word = words[i];
+          var width = ctx.measureText(currentLine + " " + word).width;
+          if (width < maxWidth) {
+            currentLine += " " + word;
+          } else {
+            lines.push(currentLine);
+            currentLine = word;
+          }
+        }
+        lines.push(currentLine);
+        return lines;
+      }
       function checkSign(){
         for (var y = 0; y < tm.length; y++) {
           for (var x = 0; x < tm[y].length; x++) {
@@ -1068,16 +1086,18 @@
             dtx.font = "bold 20px Monospace"
             let text = dtx.measureText(signhover.text)
             let width = text.width
-            let height = 30
-            let widthcap = 500
-            if (width > widthcap) {
-              width = widthcap
-              for (var i =0; (width-width%widthcap)/widthcap + 1)
+            let lines = getLines(dtx, signhover.text, 500)
+            height = 30
+            for (var i = 0; i < lines.length; i++) {
+              height += 20
             }
             dtx.fillStyle = "rgba(0, 0, 0, 0.7)"
-            dtx.roundRect(disp.width/2 - width/2 - 10, disp.height - 50, width + 20, 30, 20).fill()
+            dtx.roundRect(disp.width/2 - width/2 - 10, disp.height - 20 - height, width + 20, height, 20).fill()
             dtx.fillStyle = "white"
-            dtx.fillText(signhover.text, disp.width/2 - width/2, disp.height - 30)
+            for (var i = 0; i < lines.length; i++) {
+              dtx.fillText(lines[i], disp.width/2 - width/2, height - 25)
+              height -= 20
+            }
           }
           if (key) {
             dtx.fillStyle = "rgba(100, 100, 100, 0.8)";
