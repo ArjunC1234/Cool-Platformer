@@ -211,6 +211,7 @@
         let leveldata = getItem("leveldata")
         let missing = []
         let keys = []
+        
         for (const [key, value] of Object.entries(leveldata)) {
           if (key != "openworld") {
             keys.push(key)
@@ -222,10 +223,15 @@
             missing.push(ldatakeys[i])
           }
         }
+        
         for (var i = 0; i < missing.length; i++) {
           leveldata[missing[i]] = {time : "null", disabled : false}
         }
+        
+        saveItem("leveldata", leveldata)
       }
+      
+      
     </script>
   </body>
 </html>
