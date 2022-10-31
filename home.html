@@ -191,6 +191,7 @@
       
       var storage = window.localStorage
       var ldatakeys = ["openworld", "L1"]
+      
       function getItem(item) {
         return JSON.parse(storage.getItem(item))
       }
@@ -200,7 +201,7 @@
       function getPreviousLvlKey(str) {
         return "L" + (parseInt(str[1])-1).toString()
       }
-      console.log(getPreviousLvlKey("L6"))
+      
       if (storage.getItem("leveldata") == null) {
         let leveldata = {
           openworld : {disabled : true},
@@ -230,7 +231,6 @@
         
         saveItem("leveldata", leveldata)
       }
-      
       
     </script>
   </body>
