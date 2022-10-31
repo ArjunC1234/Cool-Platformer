@@ -175,18 +175,20 @@
     <!--TYPE HTML HERE-->
     <div class = "gradientbg zi0"></div>
     <div class="container z1">
-      <h1 class="title">Basic<br>Platformer</h1>
+      <h1 class="title">Cool<br>Platformer</h1>
     </div>
     <div class="container2 z1">
       <div class="levels z1">
-        <button onclick="window.location.pathname = '/levels/openworld'"><emp>Open World</emp></button>
-        <button onclick="window.location.pathname = '/levels/tutorial'"><b>Lvl 1: </b>Tutorial</button>
+        <button id="openworld" onclick="window.location.pathname = '/levels/openworld'"><emp>Open World</emp></button>
+        <button id="L1" onclick="window.location.pathname = '/levels/tutorial'"><b>Lvl 1: </b>Tutorial</button>
       </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io()
+      var storage = window.localStorage
       
+      if (storage.getItem("leveldata") == "")
     </script>
   </body>
 </html>
