@@ -186,22 +186,31 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io()
+      
+      
+      
       var storage = window.localStorage
       function getItem(item) {
         return JSON.parse(storage.getItem(item))
       }
-      function saveItem(item) {
-        return JSON.parse(storage.getItem(item))
+      function saveItem(item, value) {
+        storage.setItem(item, JSON.stringify(value))
       }
+      function getPreviousLvlKey(str) {
+        return "L" + (parseInt(str[1])-1).toString()
+      }
+      console.log(getPreviousLvlKey("L6"))
+      /*
       if (storage.getItem("leveldata") == null) {
         let leveldata = {
           openworld : {disabled : true},
           L1 : {time : "null", disabled : false}
         }
-        storage.setItem("leveldata", JSON.stringify(leveldata))
+        saveItem("leveldata", leveldata)
       } else if {
         
       }
+      */
     </script>
   </body>
 </html>
