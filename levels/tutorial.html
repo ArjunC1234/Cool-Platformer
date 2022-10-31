@@ -756,17 +756,7 @@
                 player.x = playerOld.x;
                 let tile = collide[1];
                 if (player.x >= tile.x + 48) {
-                  let playcen = [player.x + player.width/2, player.y + player.height/2]
-                  let playtm = [(playcen[0] - playcen[0] % 48)/48, (playcen[1] - playcen[1] % 48)/48]
-                  if (playtm[0] - 1 >= 0 && playtm[1] - 1 >= 0) {
-                    if (tm[playtm[0] -1][playtm[1] -1] == 0 && onGround){
-                      player.y -= player.height
-                    } else {
-                      player.x = tile.x + 48;
-                    }
-                  } else {
-                    player.x = tile.x + 48;
-                  }
+                  player.x = tile.x + 48;
                 }
               }
             }
