@@ -211,12 +211,19 @@
         let leveldata = getItem("leveldata")
         let missing = []
         let keys = []
-        for (var i = 0; i < leveldata.entries().length; i++) {
-          keys.push(leveldata.entries()[i][0])
-          
+        for (const [key, value] of Object.entries(leveldata)) {
+          if (key != "openworld") {
+            keys.push(key)
+          }
         }
+        
         for (var i = 0; i < ldatakeys.length; i++) {
-          if (leveldata.entries()ldatakeys[i])
+          if (!keys.contains(ldatakeys[i])) {
+            missing.push(ldatakeys[i])
+          }
+        }
+        for (var i = 0; i < missing.length; i++) {
+          leveldata[missing[i]] = {time : "null", disabled : false}
         }
       }
     </script>
