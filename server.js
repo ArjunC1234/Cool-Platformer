@@ -6,7 +6,7 @@ const sqlite3 = require('sqlite3').verbose();
 
 app.set("trust proxy", true);
 
-var down = false
+var down = true
 var allowedips = [process.env.ALLOWED1]
 
 var levelSockets = []
