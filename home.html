@@ -179,7 +179,7 @@
     </div>
     <div class="container2 z1">
       <div class="levels z1">
-        <button id="openworld" onclick="window.location.pathname = '/levels/openworld'"><emp>Open World</emp></button>
+        <button id="Lopenworld" onclick="window.location.pathname = '/levels/openworld'"><emp>Open World</emp></button>
         <button id="L1" onclick="window.location.pathname = '/levels/tutorial'"><b>Lvl 1: </b>Tutorial</button>
       </div>
     </div>
@@ -187,8 +187,21 @@
     <script>
       var socket = io()
       var storage = window.localStorage
-      
-      if (storage.getItem("leveldata") == "")
+      function getItem(item) {
+        return JSON.parse(storage.getItem(item))
+      }
+      function saveItem(item) {
+        return JSON.parse(storage.getItem(item))
+      }
+      if (storage.getItem("leveldata") == null) {
+        let leveldata = {
+          openworld : {disabled : true},
+          L1 : {time : "null", disabled : false}
+        }
+        storage.setItem("leveldata", JSON.stringify(leveldata))
+      } else if {
+        
+      }
     </script>
   </body>
 </html>
