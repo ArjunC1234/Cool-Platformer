@@ -181,118 +181,12 @@
       <div class="levels z1">
         <button id="Lopenworld" onclick="window.location.pathname = '/levels/openworld'"><emp>Open World</emp></button>
         <button id="L1" onclick="window.location.pathname = '/levels/tutorial'"><b>Lvl 1: </b>Tutorial</button>
-        <button>
-          AMOGUS 
-        </button>
-              <button>
-          AMOGUS 
-        </button>
-        <button>
-          AMOGUS 
-        </button>
-        <button>
-          AMOGUS 
-        </button>
-        <button>
-          AMOGUS 
-        </button>
-                <button>
-          AMOGUS 
-        </button>
-        <button>
-          AMOGUS 
-        </button>
-        <button>
-          AMOGUS 
-        </button>
-                <button>
-          AMOGUS 
-        </button>
-                <button>
-          AMOGUS 
-        </button>
-                <button>
-          AMOGUS 
-        </button>
-                <button>
-          AMOGUS 
-        </button>
-                <button>
-          AMOGUS 
-        </button>
-                <button>
-          AMOGUS 
-        </button>
-                <button>
-          AMOGUS 
-        </button>
-                <button>
-          AMOGUS 
-        </button>
-                <button>
-          AMOGUS 
-        </button>
-                <button>
-          AMOGUS 
-        </button>
-                <button>
-          AMOGUS 
-        </button>
-                <button>
-          AMOGUS 
-        </button>
         
       </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io()
-      
-      
-      
-      var storage = window.localStorage
-      var ldatakeys = ["openworld", "L1"]
-      
-      function getItem(item) {
-        return JSON.parse(storage.getItem(item))
-      }
-      function saveItem(item, value) {
-        storage.setItem(item, JSON.stringify(value))
-      }
-      function getPreviousLvlKey(str) {
-        return "L" + (parseInt(str[1])-1).toString()
-      }
-      /*
-      if (storage.getItem("leveldata") == null) {
-        let leveldata = {
-          openworld : {disabled : true},
-          L1 : {time : "null", disabled : false}
-        }
-        saveItem("leveldata", leveldata)
-      } else if {
-        let leveldata = getItem("leveldata")
-        let missing = []
-        let keys = []
-        
-        for (const [key, value] of Object.entries(leveldata)) {
-          if (key != "openworld") {
-            keys.push(key)
-          }
-        }
-        
-        for (var i = 0; i < ldatakeys.length; i++) {
-          if (!keys.contains(ldatakeys[i])) {
-            missing.push(ldatakeys[i])
-          }
-        }
-        
-        for (var i = 0; i < missing.length; i++) {
-          leveldata[missing[i]] = {time : "null", disabled : false}
-        }
-        
-        saveItem("leveldata", leveldata)
-      }
-      */
     </script>
   </body>
 </html>
