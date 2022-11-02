@@ -71,14 +71,14 @@
       var canvas = document.createElement("canvas");
       var ctx = canvas.getContext("2d");
       var gravite = 0;
-      var gravacc = 1.6;
+      var gravacc = 1.55;
       var gravcap = 12;
       var legrotation = 0;
       var legtick = 0;
       var dispNum = 1;
-      var jumpacc = 0.3;
+      var jumpacc = 0.4;
       var jumpaccog = jumpacc
-      var jumpSpeed = 10;
+      var jumpSpeed = 8;
       var jumpcap = 0.4;
       var finish = new Image();
       finish.src =
@@ -139,8 +139,10 @@
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       ];
+      addSign(13, 14, "Well this is... interesting. It seems that your world has flipped upside down.")
+      addSign(12, 14, "Sorry ")
       function addSign(x, y, text) {
         if (x >= 0 && x < tm[0].length && y >= 0 && y < tm.length) {
           if (tm[y][x] == 0) {
@@ -992,16 +994,7 @@
           socket.emit("position", player.x, player.y, legrotation, right, window.location.pathname)
           dtx.clearRect(0, 0, disp.width, disp.height);
           dtx.save(); // save the current canvas state
-          let horizontal = false
-          let vertical = false
-          dtx.setTransform(
-            horizontal ? -1 : 1,
-            0, // set the direction of x axis
-            0,
-            vertical ? -1 : 1, // set the direction of y axis
-            x + (horizontal ? disp.width : -20), // set the x origin
-            y + (vertical ? disp.height : -13) // set the y origin
-          );
+          dtx.scale(-1, -1)
           dtx.drawImage(
             canvas,
             (sx = camx),
@@ -1010,8 +1003,8 @@
             (sh = camheight),
             (dx = 0),
             (dy = 0),
-            (dw = disp.width),
-            (dy = disp.height)
+            (dw = -disp.width),
+            (dy = -disp.height)
           );
           dtx.restore(); 
           checkSign()
