@@ -43,6 +43,10 @@ app.get("/levels/lvl1", (req, res) => {
   checkIP(req, res, "/levels/lvl1.html")
 });
 
+app.get("/levels/lvl2", (req, res) => {
+  checkIP(req, res, "/levels/lvl2.html")
+});
+
 
 
 
