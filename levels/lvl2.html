@@ -991,7 +991,17 @@
           }
           socket.emit("position", player.x, player.y, legrotation, right, window.location.pathname)
           dtx.clearRect(0, 0, disp.width, disp.height);
-          dtx.mirrorImage()
+          dtx.save(); // save the current canvas state
+          let horizontal = false
+          let vertical = false
+          dtx.setTransform(
+            horizontal ? -1 : 1,
+            0, // set the direction of x axis
+            0,
+            vertical ? -1 : 1, // set the direction of y axis
+            x + (horizontal ? disp.width : -20), // set the x origin
+            y + (vertical ? disp.height : -13) // set the y origin
+          );
           dtx.drawImage(
             canvas,
             (sx = camx),
@@ -1003,6 +1013,7 @@
             (dw = disp.width),
             (dy = disp.height)
           );
+          dtx.restore(); 
           checkSign()
           if (signhover.active) {
             dtx.font = "bold 20px Monospace"
