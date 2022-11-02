@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tim Markle</title>
+    <title>Cool Platformer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       .home {
@@ -142,7 +142,6 @@
         [0, 6, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
         [1, 1, 1, 1, 1, 1, 3, 3, 1, 1, 1, 3, 3, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5] //18
       ];
-      addSign(4, 15, 'Sorry, this level is still in the making.')
       addSign(1, 8, 'You may be wondering, "Why is there a random sign here?" To be honest, I\'m not so sure myself. However, it is important to note that this very sign in the middle of nowhere was created with oak planks and a stick. And before you even begin to think it, or say it for that matter, I assure you that this sign is quite authentic. If you are still reading this, I envy your patience. By now you have probably acknowledged that this sign simply does not contribute to the difficulty of this level. The only thing this sign has accomplished is burdening you with a historical piece of literature.')
       function addSign(x, y, text) {
         if (x >= 0 && x < tm[0].length && y >= 0 && y < tm.length) {
@@ -242,7 +241,7 @@
         [1, 3, 3, 3, 1, 1, 1, 1, 3, 1, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
       */
       var key = false;
-      var signhover = {active : true, text : ""}
+      var signhover = {active : false, text : ""}
       function collision() {
         let oneTimeJumpBlock = true;
         let oneTimeSpeedBlock = true;
