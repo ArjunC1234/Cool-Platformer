@@ -1024,7 +1024,20 @@
             (dw = -disp.width),
             (dy = -disp.height)
           );
-          dtx.restore(); 
+          dtx.restore();
+          /*
+          dtx.drawImage(
+            canvas,
+            (sx = camx),
+            (sy = camy),
+            (sw = camwidth),
+            (sh = camheight),
+            (dx = 0),
+            (dy = 0),
+            (dw = disp.width),
+            (dy = disp.height)
+          );
+          */
           checkSign()
           if (signhover.active) {
             dtx.font = "bold 20px Monospace"
