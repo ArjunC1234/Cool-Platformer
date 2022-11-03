@@ -995,7 +995,7 @@
           socket.emit("position", player.x, player.y, legrotation, right, window.location.pathname)
           dtx.clearRect(0, 0, disp.width, disp.height);
           dtx.save(); // save the current canvas state
-          dtx.scale(1, -1)
+          dtx.scale(-1, -1)
           dtx.drawImage(
             canvas,
             (sx = camx),
@@ -1004,7 +1004,7 @@
             (sh = camheight),
             (dx = 0),
             (dy = 0),
-            (dw = disp.width),
+            (dw = -disp.width),
             (dy = -disp.height)
           );
           dtx.restore(); 
