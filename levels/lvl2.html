@@ -29,6 +29,81 @@
     <div class= "home" onclick="window.location.pathname = '/'"></div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
+      function devTools(password = "") {
+        try {
+          document.getElementById("devtools").remove();
+          dispNum = 1;
+          return "'Developer Tools' has been hidden.";
+        } catch (err) {
+          if (password == "dev123") {
+            dispNum = 8 / 10;
+            let interface = document.createElement("div");
+            interface.id = "devtools";
+            interface.style =
+              "position : absolute; top : 0; height : 100vh; width : 20vw; background-color : black; float:right; right : 0px; overflow-y : scroll; overflow-x: wrap;";
+            let tmInput = document.createElement("textarea");
+            tmInput.style = "overflow: scroll; overflow-x : scroll;";
+            tmInput.backgroundColor = "black";
+            tmInput.fontFamily = "Verdana";
+            tmInput.style =
+              "white-space: pre; overflow-wrap: normal; overflow-x: scroll;";
+            let str = "";
+            for (var i = 0; i < tm.length; i++) {
+              let strpush = "[";
+              for (var x = 0; x < tm[i].length; x++) {
+                strpush += tm[i][x];
+                if (x != tm[i].length - 1) {
+                  strpush += ", ";
+                }
+              }
+              strpush += "]";
+              if (i != tm.length - 1) {
+                strpush += ", \r\n";
+              } else {
+                strpush += "\r\n";
+              }
+
+              str += strpush;
+            }
+            tmInput.value = str;
+            tmInput.style.width = "99%";
+            tmInput.style.height = "50vh";
+            tmInput.id = "tminput";
+            let info = document.createElement("p");
+            info.innerHTML =
+              "<em>NOTE: Tilemap must be square.</em><br></br>0 --> air <br></br> 1 --> tile <br></br> 2 --> double jump <br></br> 3 --> reset <br></br> 4 --> x2 speed <br></br> 5 --> finish <br></br> 6 --> spawn";
+            info.style.color = "white";
+            let setBtn = document.createElement("button");
+            setBtn.innerHTML = "Save";
+            setBtn.onclick = function () {
+              let tilemap = JSON.parse(
+                "[" + document.getElementById("tminput").value + "]"
+              );
+              going.up = false;
+              going.right = false;
+              going.left = false;
+              tm = tilemap;
+              for (var y = 0; y < tm.length; y++) {
+                for (var x = 0; x < tm[y].length; x++) {
+                  if (tm[y][x] == 6) {
+                    playerxstart = x * 48;
+                    playerystart = y * 48;
+                  }
+                }
+              }
+              player.x = playerxstart;
+              player.y = playerystart;
+              canvas.height = tm.length * 48;
+              canvas.width = tm[0].length * 48;
+            };
+            interface.appendChild(tmInput);
+            interface.appendChild(setBtn);
+            interface.appendChild(info);
+            document.body.appendChild(interface);
+            return "'Developer Tools' has been revealed.";
+          }
+        }
+      }
       var socket = io()
       var client_users = []
       socket.on("connect", function () {
