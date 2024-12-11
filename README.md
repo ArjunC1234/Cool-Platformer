@@ -8,7 +8,7 @@
 **<h3>Game Concept</h3>**
 
 This game is about a person whose goal is to get to the end of the level.
-
+[Play the game using this link.](https://cool-platformer.glitch.me/)
 ***
 **<h3>Dependencies/Packages</h3>**
 
@@ -37,13 +37,3 @@ All physics algorithms are manually coded and do not use third-party packages. J
 Multiplayer sounds complicated, but after wrapping my brain around some concepts, I was able to get it working. Because Socket.IO uses TCP, transmitting data is very slow for game development. Unfortunately, there isn't an easy way to use UDP in JS, so I had to make do with what I had. I dealt with this issue by calculating physics client side, and transmitting coordinates across the server. This way, at least each player would be able to have smooth movement regardless of how much data was being transmitted at once. If I had processed game data and calculations server-side, game updates would happen for all clients at the exact same time. An example of this is in the following project (that I made) "fluffy-patch-finch.glitch.me".
 ***
 
-<!-- Copy and Paste Me -->
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/cool-platformer?path=server.js&previewSize=0"
-    title="cool-platformer on Glitch"
-    allow="geolocation; microphone; camera; midi; encrypted-media; xr-spatial-tracking; fullscreen"
-    allowFullScreen
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
