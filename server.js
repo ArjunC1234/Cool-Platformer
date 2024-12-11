@@ -1,7 +1,7 @@
 const app = require("express")();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;;
 
 app.set("trust proxy", true);
 
@@ -44,9 +44,6 @@ app.get("/levels/lvl1", (req, res) => {
 
 app.get("/levels/lvl2", (req, res) => {
   checkIP(req, res, "/levels/lvl2.html")
-});
-app.get("/levels/lvl3", (req, res) => {
-  checkIP(req, res, "/levels/lvl3.html")
 });
 
 
