@@ -13,8 +13,7 @@ This game is about a person whose goal is to get to the end of the level.
 **<h3>Dependencies/Packages</h3>**
 
 The following dependencies are used in this project:
->Express.js
-<br>
+>Express.js <br>
 >Socket.IO
 
 **Express.js**
